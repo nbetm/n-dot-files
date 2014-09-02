@@ -1,0 +1,706 @@
+" vimrc file
+"
+" Author: Nelson R Monserrate <nrmonserrate@gmail.com>
+
+" ----------------------------------------------------------------------------------------------------------------------
+"  Global Configuration
+" ----------------------------------------------------------------------------------------------------------------------
+
+" Ve IMproved
+set nocompatible
+
+" Change all Leaders to <SPACE>
+let mapleader = " "
+let maplocalleader = " "
+
+" Change the time used to wait for user input on mappings
+set timeoutlen=500
+
+" Better search
+set hlsearch
+set ignorecase
+set smartcase
+set incsearch
+
+" Allow unsaved buffers to be put in the background
+set hidden
+
+" Put a $ at the end instead of just deleting the text and replacing it
+" set cpoptions+=$
+
+" Lines to keep on top and bottom on scroll
+set scrolloff=2
+
+" Allow the cursor to go in to 'invalid' places
+" set virtualedit=all
+
+" History size
+set history=1000
+
+" Relative number lines instead of absolute
+" set relativenumber
+
+" ----------------------------------------------------------------------------------------------------------------------
+"  Formatting
+" ----------------------------------------------------------------------------------------------------------------------
+
+" Turn on syntax highlighting
+syntax on
+
+" Dark background
+" set background=dark
+
+" Set the terminal number of colors
+if &term=="xterm"
+  " set t_Co=8
+  " set t_Co=16
+  set t_Co=256
+  set t_Sb=^[[4%dm
+  set t_Sf=^[[3%dm
+endif
+
+" Color scheme
+colorscheme nbetm
+
+" Turn on LineNumber
+set number
+
+" Turn off automatic file type detection (will be activated at the end)
+filetype off
+
+" Tabs
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+set smarttab
+
+" Folding
+" set foldenable
+set nofoldenable
+set foldcolumn=0
+set foldmethod=syntax
+" set foldtext=Fold_Text()
+set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
+
+" Wrap lines at convenient points
+set linebreak
+
+" No wrap by default
+set nowrap
+
+" Allow backspacing over everything in Insert mode
+set backspace=indent,eol,start
+
+" Enable autoindent
+set autoindent
+set smartindent
+
+" Characters to use in List mode
+set listchars=eol:◊,tab:→\ ,trail:۰,extends:»,precedes:«,nbsp:●
+
+" Keywords
+set iskeyword+=-
+
+" Prevents two spaces after punctuation on a join
+set nojoinspaces
+
+" ----------------------------------------------------------------------------------------------------------------------
+"  Visual
+" ----------------------------------------------------------------------------------------------------------------------
+
+" Use wildmenu for better command-line completion
+set wildmenu
+
+" Command line completion
+set wildmode=longest:full,full
+
+" Insert mode completion
+set completeopt=menu,longest,preview
+
+" Display incomplete commands
+set showcmd
+
+" Show current mode
+set showmode
+
+" Always show the status line
+set laststatus=2
+
+" Don't redraw screen
+set lazyredraw
+
+" Status line format [switching to tmuxline]
+" set statusline=%<%f
+" set statusline+=\ %m\ %R%H\ %#StatusLineWarn#%{Warn_Extra_Whitespace()}%{Warn_Extra_Tab()}%*
+" set statusline+=\ %#StatusLineError#%{SyntasticStatuslineFlag()}%*
+" set statusline+=\ %=%-9(%03b-0x%02B%)
+" set statusline+=\ B#%-1n
+" set statusline+=\ [%{&ff}%{&fenc!=''?'.'.&fenc:''}%{&ft!=''?'.'.&ft:''}]
+" set statusline+=\ \ %10(%4l:%c%V%)\ [%LL\ -\ %P]
+
+" ----------------------------------------------------------------------------------------------------------------------
+"  Windows
+" ----------------------------------------------------------------------------------------------------------------------
+
+" Split windows to below and right
+set splitbelow splitright
+
+" Filling chars
+set fillchars=stl:\ ,stlnc:\ ,vert:\ ,fold:\ ,diff:-
+
+" ----------------------------------------------------------------------------------------------------------------------
+"  Views n Sessions n Swapfiles n Vim Info
+" ----------------------------------------------------------------------------------------------------------------------
+
+" Views
+set viewdir=~/.vim/storage/vim-views
+set viewoptions=cursor,folds,options,slash,unix
+
+" Sessions
+
+" Swap Files
+set directory=~/.vim/storage/swapfiles//,.
+
+" Vim Info
+set viminfo+=n~/.vim/storage/viminfo
+
+" ----------------------------------------------------------------------------------------------------------------------
+"  Global Mappings
+" ----------------------------------------------------------------------------------------------------------------------
+
+" Wrapped lines goes down/up to next row, rather than next line in file
+nnoremap j gj
+nnoremap k gk
+
+" Visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv
+
+" ----------------------------------------------------------------------------------------------------------------------
+"  Global Abbreviations
+" ----------------------------------------------------------------------------------------------------------------------
+
+ab <expr> dn strftime('%d.%b.%Y')
+ab        dt yyyy.mm.dd
+
+" ----------------------------------------------------------------------------------------------------------------------
+"  Leader Mappings
+" ----------------------------------------------------------------------------------------------------------------------
+
+" Edit the vimrc file
+map <silent> <leader>ev     :e $MYVIMRC<CR>
+
+" Source the vimrc file
+map <silent> <leader>sv     :source $MYVIMRC<CR>
+
+" Close current window / tab
+map <silent> <leader>q      :close \| :wincmd p<CR>
+map <silent> <leader>Q      :tabclose<CR>
+
+" Toggle Highlighting
+map <silent> <leader>th     :set hlsearch! \| call Echo('Search Highlight: '. (&hlsearch ? 'Yes' : 'No'))<CR>
+
+" Toggle List mode
+map <silent> <leader>tl     :set list! \| call Echo('List Mode: ' . (&list ? 'Yes' : 'No'))<CR>
+
+" Toggle Highlight Extra Characters
+" map <silent> <leader>tS     :call Highlight_Extra_Whitespace()<CR>
+" map <silent> <leader>tT     :call Highlight_Extra_Tab()<CR>
+map <silent> <leader>ts     /\s\+$<CR>
+map <silent> <leader>tt     /\t\+<CR>
+
+" Toggle Wrap
+map <silent> <leader>tw     :set wrap! \| call Echo('Text Wrap: ' . (&wrap ? 'Yes' : 'No'))<CR>
+
+" Toggle Syntax Check Mode
+map <silent> <leader>tk     :call Toggle_Syntax_Check_Mode()<CR>
+
+" Toggle Folding Mode
+map <silent> <leader>tf     :call Toggle_Folding_Mode()<CR>
+nmap <silent> , za
+vmap <silent> , za
+
+" Update current line Date (to Now)
+" map <silent> <leader>ud     m':s/.*\zs\(\d\{2}\.\(\d\{2}\\|\a\{3}\)\.\d\{4}\)\\|\(dd\.mmm\.yyyy\)/\=strftime('%d.%b.%Y')/e \| nohl<CR>``
+
+" Update current line RV (+1)
+" map <silent> <leader>ur     m':s/RV\zs\d\+/\=printf('%03s', str2nr(submatch(0)) + 1)/e \| nohl<CR>``
+
+" FuzzyFinder
+nmap <silent> <leader>fb    :FufBuffer!<CR>
+nmap <silent> <leader>fc    :FufCoverageFile!<CR>
+nmap <silent> <leader>ff    :FufFile!<CR>
+nmap <silent> <leader>fF    :FufFileWithCurrentBufferDir!<CR>
+nmap <silent> <leader>fh    :FufMruCmd!<CR>
+nmap <silent> <leader>fl    :FufLine!<CR>
+nmap <silent> <leader>fr    :FufMruFile!<CR>
+nmap <silent> <leader>fR    :FufMruFileInCwd!<CR>
+
+" Fugitive
+nmap <silent> <leader>gd    :Gdiff<CR>
+nmap <silent> <leader>gs    :Gstatus<CR>
+vmap <silent> <leader>dg    :diffget \| diffupdate<CR>
+vmap <silent> <leader>dp    :diffput \| diffupdate<CR>
+
+" Gitv
+nmap <silent> <leader>gv    :Gitv!<CR>
+nmap <silent> <leader>gV    :Gitv<CR>
+
+" Open the NERD Tree Finder
+nmap <silent> <leader>gf    :NERDTreeFind<CR>
+
+" Go to the Quickfix window
+nmap <silent> <leader>gq    :cwindow 5<CR>
+
+" Go to the Location window
+nmap <silent> <leader>gl    :lclose \| lopen 5<CR>
+
+" Execute the command from the cursor position till the end of line
+nmap <silent> <leader>gx    "zy$:!<C-R>z<CR>
+
+" Execute the command (visual selection)
+vmap <silent> <leader>gx    "zy:!<C-R>z<CR>
+
+" Session Manager
+nmap <silent> <leader>sc    :SessionClose<CR>
+nmap <silent> <leader>sl    :SessionList<CR>
+nmap          <leader>so    :SessionOpen <C-D>
+nmap <silent> <leader>ss    :SessionSave<CR>
+
+" F-Keys Maps
+nmap <silent> <F8>          :TagbarToggle<CR>
+nmap <silent> <F10>         :NERDTreeTabsToggle<CR>
+" nmap <silent> <F10>         :NERDTreeToggle<CR>
+
+" Split line (opposite to S-J joining line)
+nnoremap <silent> <C-J>     gEa<CR><ESC>ew
+
+" Return the syntax highlighting group under the cursor
+nmap <silent> <leader><F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") .'> trans<'. synIDattr(synID(line("."),col("."),0),"name") ."> lo<". synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") .">"<CR>
+
+" NeoComplete (with UltiSnips support)
+inoremap <expr> <CR>        pumvisible() ? neocomplete#close_popup() : "\<CR>"
+inoremap <silent> <Tab>     <C-R>=HandleTabKey()<CR>
+inoremap <expr> <S-Tab>     pumvisible() ? "\<C-p>" : "\<Tab>"
+
+" Strip all trailing whitespace
+nmap <silent> <leader>w     :silent! %s/\s\+$// \| let @/='' \| call Echo('Trailing Whitespace stripped')<CR>
+
+" ----------------------------------------------------------------------------------------------------------------------
+"  Auto Commands
+" ----------------------------------------------------------------------------------------------------------------------
+
+" VIM RC {{
+augroup vimrc
+  autocmd!
+  autocmd BufWritePost                .vimrc          source $MYVIMRC
+augroup end
+" }}
+
+" Warn about Extra Characters {{
+  autocmd CursorHold,BufWritePost     *               unlet! b:warn_extra_whitespace
+  autocmd CursorHold,BufWritePost     *               unlet! b:warn_extra_tab
+" }}
+
+" Open Help Files in a Vertical Split {{
+  autocmd BufWinEnter                 *.txt           if &ft == 'help' | wincmd L | endif
+" }}
+
+" Jump to Last Known Position {{
+  autocmd BufWinEnter                 *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   execute "normal! g`\"" |
+    \   execute "normal! zz" |
+    \   execute "normal! zv" |
+    \ endif
+" }}
+
+" External Command Execution Example {{
+  " augroup mainqml
+  " autocmd!
+  " autocmd BufWritePost                main.qml          execute 'silent !sudo restart lightdm >/dev/null 2>&1 &'
+  " autocmd BufWritePost                main.qml          execute 'silent !pkill -9 Xephyr'
+  " augroup end
+" }}
+
+" ----------------------------------------------------------------------------------------------------------------------
+"  Commands
+" ----------------------------------------------------------------------------------------------------------------------
+
+" Write the file as Superuser
+" command W! w !sudo tee % >/dev/null
+
+" ----------------------------------------------------------------------------------------------------------------------
+"  Functions
+" ----------------------------------------------------------------------------------------------------------------------
+
+" Echo with Highlighting {{
+"
+function! Echo(message)
+  echohl ModeMsg | echo '--' a:message '--' | echohl None
+endfunction
+" }}
+
+" Toggle string option value {{
+"
+function! Toggle_StringOption(option, value)
+  execute 'set '. a:option . eval('&'. a:option .' =~ "'. a:value . '" ? "-=" : "+="') . a:value
+endfunction
+" }}
+
+" Fold Text {{
+"
+function! Fold_Text()
+  " Get first line, remove fold_markers and trailing spaces
+  let fhead = substitute(getline(v:foldstart), '\s*\(' . substitute(&fmr, ',', '\\|', '') . '\)\d\=', '', 'g')
+  let ftail = ' ── ' . (v:foldend - v:foldstart + 1) . ' Lns ★  ' . v:foldlevel . ' ── '
+  let stail = strchars(ftail)
+
+  if winwidth(0) < &tw || !&tw
+    let size = winwidth(0) - &fdc - &nuw * &nu
+  else
+    let size = &tw
+  endif
+  return printf("%*s%s", -size + stail, fhead, ftail)
+endfunction
+" }}
+
+" Warn about Extra Whitespace {{
+"
+function! Warn_Extra_Whitespace()
+  if !exists('b:warn_extra_whitespace')
+  let b:warn_extra_whitespace = &modifiable && search('\s\+$', 'nw') != 0 ? '[$]' : ''
+    endif
+  return b:warn_extra_whitespace
+endfunction
+" }}
+
+" Warn about Tab while ExpandTab {{
+"
+function! Warn_Extra_Tab()
+  if !exists('b:warn_extra_tab')
+    let b:warn_extra_tab = &modifiable && &expandtab && search('\t\+', 'nw') != 0 ? '[→]' : ''
+  endif
+  return b:warn_extra_tab
+endfunction
+" }}
+
+" Highlight Extra Whitespace {{
+"
+function! Highlight_Extra_Whitespace()
+  if !exists('b:matchid_extra_whitespace')
+    let b:matchid_extra_whitespace = matchadd('extraWhiteSpace', '\s\+$')
+  else
+    call matchdelete(b:matchid_extra_whitespace)
+    unlet! b:matchid_extra_whitespace
+  endif
+  call Echo('Highlight Extra Whitespace: '. (exists('b:matchid_extra_whitespace') ? 'Yes' : 'No'))
+endfunction
+" }}
+
+" Highlight Extra Tab while ExpandTab {{
+"
+function! Highlight_Extra_Tab()
+  if !exists('b:matchid_extra_tab')
+    let b:matchid_extra_tab = matchadd('extraTab', '\t\+')
+  else
+    call matchdelete(b:matchid_extra_tab)
+    unlet! b:matchid_extra_tab
+  endif
+  call Echo('Highlight Extra Tab: '. (exists('b:matchid_extra_tab') ? 'Yes' : 'No'))
+endfunction
+" }}
+
+" Set Syntax Check Mode statusline {{
+"
+function! Set_Syntax_Check_Mode_Statusline()
+  let g:syntastic_stl_format = !exists('b:syntax_check_mode') ? '[%E{E}%W{W}]' : '[E:%e W:%w]'
+endfunction
+" }}
+
+" Toggle Syntax Check Mode {{
+"
+function! Toggle_Syntax_Check_Mode()
+  if !exists('b:syntax_check_mode')
+    let b:syntax_check_mode = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_auto_jump = 1
+
+    let g:syntastic_perl_checkers = ['perl']
+    let g:syntastic_enable_perl_checker = 1
+  else
+    unlet! b:syntax_check_mode
+    let g:syntastic_auto_loc_list = 0
+    let g:syntastic_auto_jump = 0
+
+    let g:syntastic_perl_checkers = []
+    let g:syntastic_enable_perl_checker = 0
+    lclose
+  endif
+
+  call Set_Syntax_Check_Mode_Statusline()
+  call Echo('Syntax Check Mode: ' . (exists('b:syntax_check_mode') ? 'Enabled' : 'Disabled'))
+endfunction
+" }}
+
+" Toggle Folding Mode {{
+"
+function! Toggle_Folding_Mode()
+  if !exists('b:toggle_folding_mode')
+    let b:toggle_folding_mode = 1
+    set foldenable
+  else
+    unlet! b:toggle_folding_mode
+    set nofoldenable
+    lclose
+  endif
+  call Echo('Toogle Folding Mode: ' . (exists('b:toggle_folding_mode') ? 'Enabled' : 'Disabled'))
+endfunction
+" }}
+
+" Handle Tab Key Multifunction {{
+"
+function! HandleTabKey()
+  " After calling this function, g:ulti_expand_or_jump_res can be:
+  " 1 = snip expanded, 2 = jump inside snip, 0 = neither
+  call UltiSnips#ExpandSnippetOrJump()
+  if g:ulti_expand_or_jump_res == 0
+    return pumvisible() ? "\<C-n>" : "\<TAB>"
+  else
+    return ""
+  endif
+endfunction
+" }}
+
+" ----------------------------------------------------------------------------------------------------------------------
+"  Plugins Settings
+" ----------------------------------------------------------------------------------------------------------------------
+
+" Filetype :: Perl {{
+  let perl_fold = 1
+  let perl_fold_blocks = 1
+  " let perl_fold_anonymous_subs = 1
+  " let perl_nofold_subs = 1
+  let perl_nofold_packages = 1
+" }}
+
+" Filetype :: Shell {{
+  let g:is_bash = 1
+  let g:sh_fold_enabled = 7
+" }}
+
+" Vim-airline {{
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline_powerline_fonts = 1
+  let g:airline_theme = 'murmur'
+" }}
+
+" DelimitMate {{
+  let g:delimitMate_expand_cr = 1
+  let g:delimitMate_autoclose = 1
+" }}
+
+" FuzzyFinder {{
+  let g:fuf_dataDir = $HOME . '/.vim/storage/fuzzyfinder'
+  let g:fuf_modesDisable = ['bookmarkdir', 'bookmarkfile', 'tag', 'buffertag', 'taggedfile', 'jumplist', 'changelist', 'help']
+  let g:fuf_maxMenuWidth = 150
+  let g:fuf_timeFormat = '★  %d.%b.%Y %H:%M'
+  let g:fuf_abbrevMap = {
+    \ '^h:':  ['/home/nm54591a/'],
+    \ '^q:':  ['/home/nm54591a/knowledge/quick_reminders/**/'],
+    \ '^t:':  ['/home/nm54591a/temporal/'],
+    \ }
+" }}
+
+" NERDCommenter {{
+  let g:NERDSpaceDelims = 1
+" }}
+
+" NERDTree {{
+  let g:NERDTreeBookmarksFile = $HOME .'/.vim/storage/nerdtree/bookmarks'
+  let g:NERDTreeIgnore = ['\~$', '\.swp$', '\.git', '\.svn']
+  let g:NERDTreeChDirMode = 2
+  let g:NERDTreeHijackNetrw = 1
+  let g:NERDTreeDirArrows = 0
+  let g:NERDTreeWinSize = 40
+  let g:NERDTreeShowBookmarks = 1
+  let g:NERDTreeShowHidden = 1
+  let g:NERDTreeQuitOnOpen = 0
+" }}
+
+" NeoComplete {{
+  let g:neocomplete#enable_at_startup = 1
+  let g:neocomplete#data_directory = $HOME . '/.vim/storage/neocomplete'
+  let g:neocomplete#max_list = 15
+  let g:neocomplete#auto_completion_start_length = 3
+  let g:neocomplete#manual_completion_start_length = 3
+  let g:neocomplete#enable_smart_case = 1
+" }}
+
+" Session Man {{
+  let sessionman_save_on_exit = 0
+" }}
+
+" UltiSnips {{
+  let g:UltiSnipsSnippetDirectories = ['nbetm-ultisnips', 'vim-ultisnips']
+  let g:UltiSnipsSnippetsDir = '~/.vim/snippets/nbetm-ultisnips'
+
+  let g:UltiSnipsAuthor = "Nelson R Monserrate <MonserrateNelson@JohnDeere.com>"
+  let g:UltiSnipsEditSplit = "vertical"
+
+  let g:UltiSnipsExpandTrigger = "<C-Space>"
+  let g:UltiSnipsJumpForwardTrigger = "<Tab>"
+  let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
+  let g:UltiSnipsListSnippets = "<C-L>"
+
+  set runtimepath+=$HOME/.vim/snippets
+" }}
+
+" VDebug {{
+  let g:vdebug_keymap = {}
+  let g:vdebug_keymap['detach'] = '<S-F6>'
+  let g:vdebug_keymap['set_breakpoint'] = '<S-F10>'
+
+  let g:vdebug_options = {}
+  let g:vdebug_options['server'] = '127.0.0.1'
+  let g:vdebug_options['on_close'] = 'stop'
+  let g:vdebug_options['break_on_open'] = 0
+  let g:vdebug_options['watch_window_style'] = 'compact'
+" }}
+
+" Syntastic {{
+  let g:syntastic_error_symbol = '✗'
+  let g:syntastic_warning_symbol = '⚠'
+  let g:syntastic_loc_list_height = 5
+
+  call Set_Syntax_Check_Mode_Statusline()
+" }}
+
+" Tagbar {{
+  let g:tagbar_autoshowtag = 1
+  let g:tagbar_sort = 0
+" }}
+
+" ----------------------------------------------------------------------------------------------------------------------
+"  Vundle
+" ----------------------------------------------------------------------------------------------------------------------
+
+" Let Vundle do its magic
+set runtimepath+=~/.vim/bundle/vundle
+call vundle#rc()
+
+" Enabled Bundles {{
+  Plugin 'gmarik/vundle'
+  Plugin 'Raimondi/delimitMate'
+  Plugin 'SirVer/ultisnips'
+  Plugin 'Shougo/neocomplete.vim'
+  Plugin 'joonty/vdebug'
+  Plugin 'gregsexton/gitv'
+  Plugin 'honza/vim-snippets'
+  Plugin 'majutsushi/tagbar'
+  Plugin 'rodjek/vim-puppet'
+  Plugin 'scrooloose/nerdcommenter'
+  Plugin 'scrooloose/nerdtree'
+  Plugin 'scrooloose/syntastic'
+  Plugin 'tpope/vim-fugitive'
+  Plugin 'tpope/vim-speeddating'
+  Plugin 'tpope/vim-surround'
+  Plugin 'tpope/vim-unimpaired'
+  Plugin 'vim-scripts/FuzzyFinder'
+  Plugin 'vim-scripts/sessionman.vim'
+  Plugin 'vim-scripts/bufkill.vim'
+  Plugin 'vim-scripts/matchit.zip'
+  Plugin 'vim-scripts/L9'
+  Plugin 'vim-scripts/perl-support.vim'
+  Plugin 'bling/vim-airline'
+  Plugin 'jistr/vim-nerdtree-tabs'
+  Plugin 'godlygeek/tabular'
+  Plugin 'edkolev/tmuxline.vim'
+" }}
+
+" Disabled Plugins {{
+  " Plugin 'joedicastro/vim-markdown-extra-preview'
+  " Plugin 'vim-scripts/bash-support.vim'
+  " Plugin 'linux0uid/vdebug'
+  " Plugin 'mileszs/ack.vim'
+  " Plugin 'rodjek/vim-puppet'
+  " Plugin 'ervandew/supertab.git'
+  " Plugin 'vim-scripts/ManPageView.git'
+  " Plugin 'tpope/vim-ragtag.git'
+  " Plugin 'vim-scripts/Command-T.zip'
+  " Plugin 'vim-scripts/taglist.vim.git'
+  " Plugin 'marcweber/ultisnips.git'
+  " Plugin 'msanders/snipmate.vim.git'
+  " Plugin 'tomtom/tlib_vim'
+" }}
+
+" Never-Ever Plugins {{
+  " Plugin 'garyaj/vim-dbgpclient.git'
+  " Plugin 'vim-scripts/phpfolding.vim.git'
+" }}
+
+" Invalidate the SnipMate's snippets from honza/vim-snippets
+set runtimepath-=~/.vim/bundle/vim-snippets
+
+" Automatically detect file types (this is required by Vundle)
+filetype plugin indent on
+
+" ----------------------------------------------------------------------------------------------------------------------
+"  Melange
+" ----------------------------------------------------------------------------------------------------------------------
+
+" Set minimum syntax keyword length.
+" let g:neocomplete#sources#syntax#min_keyword_length = 3
+" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" " Define dictionary.
+" let g:neocomplete#sources#dictionary#dictionaries = {
+  " \ 'default' : '',
+  " \ 'vimshell' : $HOME.'/.vimshell_hist',
+  " \ 'scheme' : $HOME.'/.gosh_completions'
+    " \ }
+
+" " Define keyword.
+" if !exists('g:neocomplete#keyword_patterns')
+  " let g:neocomplete#keyword_patterns = {}
+" endif
+" let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" " Plugin key-mappings.
+" " inoremap <expr><C-g>     neocomplete#undo_completion()
+" " inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" " <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-y>  neocomplete#close_popup()
+" inoremap <expr><C-e>  neocomplete#cancel_popup()
+" " Close popup by <Space>.
+" inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+
+" Or set this.
+"let g:neocomplete#enable_cursor_hold_i = 1
+" Or set this.
+"let g:neocomplete#enable_insert_char_pre = 1
+
+" " Enable omni completion.
+" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+" if !exists('g:neocomplete#sources#omni#input_patterns')
+  " let g:neocomplete#sources#omni#input_patterns = {}
+" endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting. https://github.com/c9s/perlomni.vim
+" let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+
+" vim: set tw=120 fdm=marker fmr={{,}} fdl=0:

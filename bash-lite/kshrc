@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# kshrc (NDF::KSH)
+#
+
+# Load the '/etc/kshrc' file
+[ -s /etc/kshrc ] && source /etc/kshrc
+
+# Load component '~/.aliases'
+[ -s ~/.aliases ] && source ~/.aliases
+
+# Setup TERM
+export TERM=xterm
+
+# Setup Editor
+export EDITOR=vi
+export GIT_EDITOR=vi
+
+# Ve Improved
+set -o vi

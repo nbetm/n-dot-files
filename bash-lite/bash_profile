@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# bash_profile (NDF::BASH)
+#
+
+# Load the '~/.bashrc' file
+[ -s ~/.bashrc ] && source ~/.bashrc

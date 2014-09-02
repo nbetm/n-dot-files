@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# bash_profile (NDF::BASH)
+#
+
+# Path to the BASH section
+export NDF_BASH=$HOME/.bash
+
+# Path to the BIN section (binaries directory)
+export NDF_BIN=$HOME/.bin
+
+# Name of the 'local' component (i.e. custom directory) inside the BASH
+# section. Only the name, no leading or trailing '/'.
+export BASH_LOCAL_COMPONENT='local'
+
+# --------------------------------------------------------------------------------------------------
+
+# Path to the 'local' component inside the BASH section
+export NDF_BASH_LOCAL=$NDF_BASH/$BASH_LOCAL_COMPONENT
+
+# Load the '!bash_profile.<local-component>.bash' file for any modifications
+# needed. Note this file will not be loaded thru '_load_component()' due to the
+# '!' in the filename.
+[ -s $NDF_BASH_LOCAL/!bash_profile.$BASH_LOCAL_COMPONENT.bash ] && source $NDF_BASH_LOCAL/!bash_profile.$BASH_LOCAL_COMPONENT.bash
+
+# Include the NDF_BIN directory in the PATH
+[ -d $NDF_BIN ] && export PATH=$NDF_BIN:$PATH
+
+# Load the '~/.bashrc' file
+[ -s $HOME/.bashrc ] && source $HOME/.bashrc

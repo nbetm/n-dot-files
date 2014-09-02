@@ -1,0 +1,25 @@
+#
+# NDF :: NBETM Dot Files :: Git Ignore File
+#
+
+# Ignore 'local' directory inside the BASH section.
+bash/local
+
+# Ignore 'local' directory inside the Tmux section.
+tmux/local
+
+# Ignore '**' inside the Vim storage section
+vim/storage/**
+!vim/storage/nerdtree/bookmarks
+!vim/storage/swapfiles
+!vim/storage/vim-views
+
+# Ignore '**' inside the Vim sessions section
+vim/sessions/**
+
+# Ignore '**' inside the Vim bundle section
+vim/bundle/**
+!vim/bundle/*vundle
+
+# Ignore '.ackrc' file
+.ackrc
