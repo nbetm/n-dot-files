@@ -31,5 +31,5 @@ if ! (hostname | egrep 'ldxx90infra1|ldxx90infra2' > /dev/null); then
   [ -s /usr/local/scripts/data/$iam.bash_profile ] && rsync -aq /usr/local/scripts/data/$iam.bash_profile ~/.bash_profile
   [ -s /usr/local/scripts/data/$iam.bashrc ] && rsync -aq /usr/local/scripts/data/$iam.bashrc ~/.bashrc
 
-  [ -s /usr/local/scripts/data/$iam.vimrc] && rsync -aq /usr/local/scripts/data/$iam.vimrc ~/.vimrc
+  [ -s /usr/local/scripts/data/$iam.vimrc ] && rsync -aq /usr/local/scripts/data/$iam.vimrc ~/.vimrc
 fi
