@@ -617,6 +617,7 @@ call vundle#rc()
   Plugin 'jistr/vim-nerdtree-tabs'
   Plugin 'godlygeek/tabular'
   Plugin 'edkolev/tmuxline.vim'
+  Plugin 'airblade/vim-gitgutter'
 " }}
 
 " Disabled Plugins {{
