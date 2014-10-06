@@ -10,7 +10,7 @@ PS_OOSM='$(oosm_active && echo -e " \[${WHITE}\]⊗\[${R_COLOR}\] " || echo " ")
 is_user_root && PS_USER_COLOR=${RED} || PS_USER_COLOR=${R_COLOR}
 
 # Prompt Statement 1 :: Interactive Default
-PS1="\n${PS_LCRV}${PS_OOSM}\[${PS_USER_COLOR}\]\u@\h\[${R_COLOR}\]:\[${I_BLUE}\]\w\[${R_COLOR}\] \[${I_MAGENTA}\]\$(__git_ps1 '[%s] ')\n\[${R_COLOR}\]$ "
+PS1="\n${PS_LCRV}${PS_OOSM}\[${PS_USER_COLOR}\]\u@\h\[${R_COLOR}\]:\[${I_BLUE}\]\w\[${R_COLOR}\] \[${I_MAGENTA}\]\$(__git_ps1 '  %s ')\n\[${R_COLOR}\]$ "
 
 # Prompt Statement 2 :: Interactive Continuation
 PS2='continue-> '
