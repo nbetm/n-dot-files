@@ -10,3 +10,6 @@ tmux/local
 
 # Ignore '.ackrc' file
 .ackrc
+
+# Generic
+resources/**
