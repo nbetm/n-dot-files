@@ -1,6 +1,7 @@
-# Need to work around this
+# Ignore everything in this directory
+*
 
-FuzzyFinder
-L9
-matchit.zip
-perl-support.vim
+# Add exceptions here
+!.gitignore
+!vundle/
+!.vundle/
