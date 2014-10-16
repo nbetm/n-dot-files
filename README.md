@@ -1,4 +1,4 @@
 NDF :: NBETM Dot Files (n-dot-files)
 ====================================
 
-My ~/ for Linux (including BASH, Vim, Tmux and more)
+Something that I like to call **My dot files for UNIX/Linux**

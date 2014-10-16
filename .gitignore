@@ -2,14 +2,5 @@
 # NDF :: NBETM Dot Files :: Git Ignore File
 #
 
-# Ignore 'local' directory inside the BASH section.
-bash/local
-
-# Ignore 'local' directory inside the Tmux section.
-tmux/local
-
-# Ignore '.ackrc' file
-.ackrc
-
 # Generic
 resources/**

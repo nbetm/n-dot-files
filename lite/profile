@@ -1,7 +1,0 @@
-#!/bin/sh
-#
-# profile (NDF::KSH)
-#
-
-# Load the '~/.kshrc' file
-[ -s ~/.kshrc ] && source ~/.kshrc

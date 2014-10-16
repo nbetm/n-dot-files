@@ -62,9 +62,6 @@ endif
 " Color scheme
 colorscheme nbetm
 
-" Turn on LineNumber
-set number
-
 " Turn off automatic file type detection (will be activated at the end)
 filetype off
 
@@ -130,15 +127,6 @@ set laststatus=2
 " Don't redraw screen
 set lazyredraw
 
-" Status line format [switching to tmuxline]
-" set statusline=%<%f
-" set statusline+=\ %m\ %R%H\ %#StatusLineWarn#%{Warn_Extra_Whitespace()}%{Warn_Extra_Tab()}%*
-" set statusline+=\ %#StatusLineError#%{SyntasticStatuslineFlag()}%*
-" set statusline+=\ %=%-9(%03b-0x%02B%)
-" set statusline+=\ B#%-1n
-" set statusline+=\ [%{&ff}%{&fenc!=''?'.'.&fenc:''}%{&ft!=''?'.'.&ft:''}]
-" set statusline+=\ \ %10(%4l:%c%V%)\ [%LL\ -\ %P]
-
 " ----------------------------------------------------------------------------------------------------------------------
 "  Windows
 " ----------------------------------------------------------------------------------------------------------------------
@@ -181,7 +169,7 @@ vnoremap > >gv
 "  Global Abbreviations
 " ----------------------------------------------------------------------------------------------------------------------
 
-ab <expr> dn strftime('%d.%b.%Y')
+ab <expr> dn strftime('%Y.%m.%d')
 ab        dt yyyy.mm.dd
 
 " ----------------------------------------------------------------------------------------------------------------------
@@ -205,10 +193,8 @@ map <silent> <leader>th     :set hlsearch! \| call Echo('Search Highlight: '. (&
 map <silent> <leader>tl     :set list! \| call Echo('List Mode: ' . (&list ? 'Yes' : 'No'))<CR>
 
 " Toggle Highlight Extra Characters
-" map <silent> <leader>tS     :call Highlight_Extra_Whitespace()<CR>
-" map <silent> <leader>tT     :call Highlight_Extra_Tab()<CR>
-map <silent> <leader>ts     /\s\+$<CR>
-map <silent> <leader>tt     /\t\+<CR>
+map <silent> <leader>ts     :call Highlight_Extra_Whitespace()<CR>
+map <silent> <leader>tt     :call Highlight_Extra_Tab()<CR>
 
 " Toggle Wrap
 map <silent> <leader>tw     :set wrap! \| call Echo('Text Wrap: ' . (&wrap ? 'Yes' : 'No'))<CR>
@@ -216,16 +202,16 @@ map <silent> <leader>tw     :set wrap! \| call Echo('Text Wrap: ' . (&wrap ? 'Ye
 " Toggle Syntax Check Mode
 map <silent> <leader>tk     :call Toggle_Syntax_Check_Mode()<CR>
 
+" Toggle Line Number Mode
+map <silent> <leader>tn     :call Toggle_Line_Number_Mode()<CR>
+
 " Toggle Folding Mode
 map <silent> <leader>tf     :call Toggle_Folding_Mode()<CR>
 nmap <silent> , za
 vmap <silent> , za
 
 " Update current line Date (to Now)
-" map <silent> <leader>ud     m':s/.*\zs\(\d\{2}\.\(\d\{2}\\|\a\{3}\)\.\d\{4}\)\\|\(dd\.mmm\.yyyy\)/\=strftime('%d.%b.%Y')/e \| nohl<CR>``
-
-" Update current line RV (+1)
-" map <silent> <leader>ur     m':s/RV\zs\d\+/\=printf('%03s', str2nr(submatch(0)) + 1)/e \| nohl<CR>``
+map <silent> <leader>du     m':s/.*\zs\(\d\{4}\.\d\{2}\.\d\{2}\)\\|\(yyyy\.mm\.dd\)/\=strftime('%Y.%m.%d')/e \| nohl<CR>``
 
 " FuzzyFinder
 nmap <silent> <leader>fb    :FufBuffer!<CR>
@@ -271,7 +257,6 @@ nmap <silent> <leader>ss    :SessionSave<CR>
 " F-Keys Maps
 nmap <silent> <F8>          :TagbarToggle<CR>
 nmap <silent> <F10>         :NERDTreeTabsToggle<CR>
-" nmap <silent> <F10>         :NERDTreeToggle<CR>
 
 " Split line (opposite to S-J joining line)
 nnoremap <silent> <C-J>     gEa<CR><ESC>ew
@@ -366,31 +351,11 @@ function! Fold_Text()
 endfunction
 " }}
 
-" Warn about Extra Whitespace {{
-"
-function! Warn_Extra_Whitespace()
-  if !exists('b:warn_extra_whitespace')
-  let b:warn_extra_whitespace = &modifiable && search('\s\+$', 'nw') != 0 ? '[$]' : ''
-    endif
-  return b:warn_extra_whitespace
-endfunction
-" }}
-
-" Warn about Tab while ExpandTab {{
-"
-function! Warn_Extra_Tab()
-  if !exists('b:warn_extra_tab')
-    let b:warn_extra_tab = &modifiable && &expandtab && search('\t\+', 'nw') != 0 ? '[→]' : ''
-  endif
-  return b:warn_extra_tab
-endfunction
-" }}
-
 " Highlight Extra Whitespace {{
 "
 function! Highlight_Extra_Whitespace()
   if !exists('b:matchid_extra_whitespace')
-    let b:matchid_extra_whitespace = matchadd('extraWhiteSpace', '\s\+$')
+    let b:matchid_extra_whitespace = matchadd('Search', '\s\+$')
   else
     call matchdelete(b:matchid_extra_whitespace)
     unlet! b:matchid_extra_whitespace
@@ -403,7 +368,7 @@ endfunction
 "
 function! Highlight_Extra_Tab()
   if !exists('b:matchid_extra_tab')
-    let b:matchid_extra_tab = matchadd('extraTab', '\t\+')
+    let b:matchid_extra_tab = matchadd('Search', '\t\+')
   else
     call matchdelete(b:matchid_extra_tab)
     unlet! b:matchid_extra_tab
@@ -429,21 +394,34 @@ function! Toggle_Syntax_Check_Mode()
 
     let g:syntastic_perl_checkers = ['perl']
     let g:syntastic_enable_perl_checker = 1
-
-    let g:syntastic_enable_yaml_checker = 1
-    let g:syntastic_yaml_checkers = ['yamlxs']
   else
     unlet! b:syntax_check_mode
     let g:syntastic_auto_loc_list = 0
     let g:syntastic_auto_jump = 0
 
-    let g:syntastic_perl_checkers = []
+    let g:syntastic_perl_checkers = ['perl']
     let g:syntastic_enable_perl_checker = 0
     lclose
   endif
 
   call Set_Syntax_Check_Mode_Statusline()
   call Echo('Syntax Check Mode: ' . (exists('b:syntax_check_mode') ? 'Enabled' : 'Disabled'))
+endfunction
+" }}
+
+" Toggle Line Number Mode {{
+"
+function! Toggle_Line_Number_Mode()
+  if !exists('b:line_number_mode')
+    let b:line_number_mode = 1
+    set number
+  else
+    unlet! b:line_number_mode
+    set nonumber
+    lclose
+  endif
+
+  call Echo('Linu Number Mode: ' . (exists('b:line_number_mode') ? 'Enabled' : 'Disabled'))
 endfunction
 " }}
 
@@ -458,6 +436,7 @@ function! Toggle_Folding_Mode()
     set nofoldenable
     lclose
   endif
+
   call Echo('Toogle Folding Mode: ' . (exists('b:toggle_folding_mode') ? 'Enabled' : 'Disabled'))
 endfunction
 " }}
@@ -474,6 +453,22 @@ function! HandleTabKey()
     return ""
   endif
 endfunction
+" }}
+
+" ----------------------------------------------------------------------------------------------------------------------
+"  Functions To Load
+" ----------------------------------------------------------------------------------------------------------------------
+
+" Toggle_Line_Number_Mode {{
+  if !exists('b:line_number_mode')
+    silent call Toggle_Line_Number_Mode()
+  endif
+" }}
+
+" Toggle_Syntax_Check_Mode {{
+  if !exists('b:syntax_check_mode')
+    silent call Toggle_Syntax_Check_Mode()
+  endif
 " }}
 
 " ----------------------------------------------------------------------------------------------------------------------
@@ -517,7 +512,7 @@ endfunction
 " }}
 
 " NERDCommenter {{
-  let g:NERDSpaceDelims = 1
+  let g:NERDSpaceDelims = 2
 " }}
 
 " NERDTree {{

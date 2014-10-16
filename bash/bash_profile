@@ -18,10 +18,8 @@ export BASH_LOCAL_COMPONENT='local'
 # Path to the 'local' component inside the BASH section
 export NDF_BASH_LOCAL=$NDF_BASH/$BASH_LOCAL_COMPONENT
 
-# Load the '!bash_profile.<local-component>.bash' file for any modifications
-# needed. Note this file will not be loaded thru '_load_component()' due to the
-# '!' in the filename.
-[ -s $NDF_BASH_LOCAL/!bash_profile.$BASH_LOCAL_COMPONENT.bash ] && source $NDF_BASH_LOCAL/!bash_profile.$BASH_LOCAL_COMPONENT.bash
+# Load the 'bash_profile.<local-component>.bash' file for any modifications needed
+[ -s $NDF_BASH_LOCAL/bash_profile.$BASH_LOCAL_COMPONENT.bash ] && source $NDF_BASH_LOCAL/bash_profile.$BASH_LOCAL_COMPONENT.bash
 
 # Include the NDF_BIN directory in the PATH
 [ -d $NDF_BIN ] && export PATH=$NDF_BIN:$PATH

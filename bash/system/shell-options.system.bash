@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Auto CD
-shopt -s autocd
+# shopt -s autocd
 
 # Use variables as possible directory names
 shopt -s cdable_vars
@@ -10,7 +10,7 @@ shopt -s cdable_vars
 shopt -s cdspell
 
 # Use ** pattern in pathname expansion
-shopt -s globstar
+# shopt -s globstar
 
 # Append to the history file, don't overwrite it
 shopt -s histappend
