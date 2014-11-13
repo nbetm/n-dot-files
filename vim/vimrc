@@ -219,7 +219,6 @@ nmap <silent> <leader>fc    :FufCoverageFile!<CR>
 nmap <silent> <leader>ff    :FufFile!<CR>
 nmap <silent> <leader>fF    :FufFileWithCurrentBufferDir!<CR>
 nmap <silent> <leader>fh    :FufMruCmd!<CR>
-nmap <silent> <leader>fl    :FufLine!<CR>
 nmap <silent> <leader>fr    :FufMruFile!<CR>
 nmap <silent> <leader>fR    :FufMruFileInCwd!<CR>
 
@@ -503,11 +502,11 @@ endfunction
   let g:fuf_dataDir = $HOME . '/.vim/storage/fuzzyfinder'
   let g:fuf_modesDisable = ['bookmarkdir', 'bookmarkfile', 'tag', 'buffertag', 'taggedfile', 'jumplist', 'changelist', 'help']
   let g:fuf_maxMenuWidth = 150
-  let g:fuf_timeFormat = '★  %d.%b.%Y %H:%M'
+  let g:fuf_timeFormat = ' %Y.%m.%d %H:%M '
   let g:fuf_abbrevMap = {
-    \ '^h:':  ['/home/nm54591a/'],
-    \ '^q:':  ['/home/nm54591a/knowledge/quick_reminders/**/'],
-    \ '^t:':  ['/home/nm54591a/temporal/'],
+    \ '^h:':  ['/home/' . $USER . '/'],
+    \ '^q:':  ['/home/' . $USER . '/knowledge/quick_reminders/**/'],
+    \ '^t:':  ['/home/' . $USER . '/temporal/'],
     \ }
 " }}
 
@@ -516,7 +515,7 @@ endfunction
 " }}
 
 " NERDTree {{
-  let g:NERDTreeBookmarksFile = $HOME .'/.vim/storage/nerdtree/bookmarks'
+  let g:NERDTreeBookmarksFile = $HOME . '/.vim/storage/nerdtree/bookmarks'
   let g:NERDTreeIgnore = ['\~$', '\.swp$', '\.git$', '\.svn']
   let g:NERDTreeChDirMode = 2
   let g:NERDTreeHijackNetrw = 1
@@ -545,7 +544,7 @@ endfunction
 
 " UltiSnips {{
   let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'nbetm-ultisnips', 'vim-snippets']
-  let g:UltiSnipsSnippetsDir = '~/.vim/snippets/nbetm-ultisnips'
+  let g:UltiSnipsSnippetsDir = $HOME . '/.vim/snippets/nbetm-ultisnips'
 
   let g:UltiSnipsAuthor = "Nelson R Monserrate <nrmonserrate@gmail.com>"
   let g:UltiSnipsEditSplit = "vertical"
@@ -555,7 +554,7 @@ endfunction
   let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
   let g:UltiSnipsListSnippets = "<C-L>"
 
-  set runtimepath+=$HOME/.vim/snippets
+  set runtimepath+=~/.vim/snippets
 " }}
 
 " VDebug {{
@@ -581,6 +580,16 @@ endfunction
 " Tagbar {{
   let g:tagbar_autoshowtag = 1
   let g:tagbar_sort = 0
+" }}
+
+" Tmuxline {{
+  let g:tmuxline_preset = {
+    \'a'       : '#S',
+    \'win'     : ['#I', '#W'],
+    \'cwin'    : ['#I', '#W'],
+    \'y'       : ['%Y.%m.%d', '%R'],
+    \'z'       : '#h',
+    \'options' : {'status-justify' : 'left'} }
 " }}
 
 " ----------------------------------------------------------------------------------------------------------------------
@@ -613,7 +622,6 @@ call vundle#rc()
   Plugin 'vim-scripts/bufkill.vim'
   Plugin 'vim-scripts/matchit.zip'
   Plugin 'vim-scripts/L9'
-  Plugin 'vim-scripts/perl-support.vim'
   Plugin 'bling/vim-airline'
   Plugin 'jistr/vim-nerdtree-tabs'
   Plugin 'godlygeek/tabular'
@@ -622,6 +630,7 @@ call vundle#rc()
 " }}
 
 " Disabled Plugins {{
+  " Plugin 'vim-scripts/perl-support.vim'
   " Plugin 'joedicastro/vim-markdown-extra-preview'
   " Plugin 'vim-scripts/bash-support.vim'
   " Plugin 'linux0uid/vdebug'
