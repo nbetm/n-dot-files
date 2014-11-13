@@ -544,10 +544,10 @@ endfunction
 " }}
 
 " UltiSnips {{
-  let g:UltiSnipsSnippetDirectories = ['nbetm-ultisnips', 'vim-ultisnips']
+  let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'nbetm-ultisnips', 'vim-snippets']
   let g:UltiSnipsSnippetsDir = '~/.vim/snippets/nbetm-ultisnips'
 
-  let g:UltiSnipsAuthor = "Nelson R Monserrate <MonserrateNelson@JohnDeere.com>"
+  let g:UltiSnipsAuthor = "Nelson R Monserrate <nrmonserrate@gmail.com>"
   let g:UltiSnipsEditSplit = "vertical"
 
   let g:UltiSnipsExpandTrigger = "<C-Space>"
