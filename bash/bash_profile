@@ -1,7 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # bash_profile (NDF::BASH)
 #
+
+# Man Path
+export MANPATH=/usr/local/share/man:$MANPATH
 
 # Path to the BASH section
 export NDF_BASH=$HOME/.bash

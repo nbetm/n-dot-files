@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # SSH
 alias ssh='ssh -q'
 alias scp='scp -q'

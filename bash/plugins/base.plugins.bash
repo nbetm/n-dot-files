@@ -1,5 +1,3 @@
-#!/bin/bash
-
 #
 # Function: path_leader()
 #

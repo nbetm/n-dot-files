@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # tmux bin
 tmux_bin='/usr/local/bin/tmux'
 
@@ -11,7 +9,7 @@ tmux_bin='/usr/local/bin/tmux'
 #
 function irssi_window() {
   $tmux_bin renamew irc                                    # name the window
-  $tmux_bin -q setw main-pane-width $(($(tput cols) - 21)) # set the main pane width to the total width-20
+  $tmux_bin -q setw main-pane-width $(($(tput cols) - 20)) # set the main pane width to the total width - 20
   $tmux_bin splitw -v "cat ~/.irssi/nicklistfifo"          # create the window and begin reading the fifo
   $tmux_bin -q selectl main-vertical                       # assign the layout
   $tmux_bin selectw -t irc                                 # select window
@@ -26,16 +24,4 @@ function irssi_window() {
 function irssi_launch() {
   irssi_window
   irssi
-}
-
-#
-# Function: irssi_repair()
-#
-# Repairs irssi window
-#
-function irssi_repair() {
-  $tmux_bin selectw -t irc
-  $tmux_bin selectp -t 0
-  $tmux_bin killp -a
-  irssi_window
 }

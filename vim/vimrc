@@ -257,6 +257,9 @@ nmap <silent> <leader>ss    :SessionSave<CR>
 nmap <silent> <F8>          :TagbarToggle<CR>
 nmap <silent> <F10>         :NERDTreeTabsToggle<CR>
 
+" Execute make
+nmap <silent> <leader>rr    :!%<CR>
+
 " Split line (opposite to S-J joining line)
 nnoremap <silent> <C-J>     gEa<CR><ESC>ew
 
@@ -390,16 +393,10 @@ function! Toggle_Syntax_Check_Mode()
     let b:syntax_check_mode = 1
     let g:syntastic_auto_loc_list = 1
     let g:syntastic_auto_jump = 1
-
-    let g:syntastic_perl_checkers = ['perl']
-    let g:syntastic_enable_perl_checker = 1
   else
     unlet! b:syntax_check_mode
     let g:syntastic_auto_loc_list = 0
     let g:syntastic_auto_jump = 0
-
-    let g:syntastic_perl_checkers = ['perl']
-    let g:syntastic_enable_perl_checker = 0
     lclose
   endif
 
@@ -455,31 +452,16 @@ endfunction
 " }}
 
 " ----------------------------------------------------------------------------------------------------------------------
-"  Functions To Load
-" ----------------------------------------------------------------------------------------------------------------------
-
-" Toggle_Line_Number_Mode {{
-  if !exists('b:line_number_mode')
-    silent call Toggle_Line_Number_Mode()
-  endif
-" }}
-
-" Toggle_Syntax_Check_Mode {{
-  if !exists('b:syntax_check_mode')
-    silent call Toggle_Syntax_Check_Mode()
-  endif
-" }}
-
-" ----------------------------------------------------------------------------------------------------------------------
 "  Plugins Settings
 " ----------------------------------------------------------------------------------------------------------------------
 
 " Filetype :: Perl {{
-  let perl_fold = 1
-  let perl_fold_blocks = 1
-  " let perl_fold_anonymous_subs = 1
-  " let perl_nofold_subs = 1
-  let perl_nofold_packages = 1
+  autocmd BufNewFile,BufRead *.pl
+    \ let perl_fold = 1 |
+    \ let perl_fold_blocks = 1 |
+    \ let perl_nofold_packages = 1 |
+    \ set autowrite |
+    \ set makeprg=perl\ %
 " }}
 
 " Filetype :: Shell {{
@@ -573,6 +555,9 @@ endfunction
   let g:syntastic_error_symbol = ''
   let g:syntastic_warning_symbol = ''
   let g:syntastic_loc_list_height = 5
+  let g:syntastic_puppet_puppetlint_args = '--no-80chars-check --no-class_inherits_from_params_class-check'
+  let g:syntastic_perl_checkers = ['perl']
+  let g:syntastic_enable_perl_checker = 1
 
   call Set_Syntax_Check_Mode_Statusline()
 " }}
@@ -584,12 +569,12 @@ endfunction
 
 " Tmuxline {{
   let g:tmuxline_preset = {
-    \'a'       : '#S',
-    \'win'     : ['#I', '#W'],
-    \'cwin'    : ['#I', '#W'],
-    \'y'       : ['%Y.%m.%d', '%R'],
-    \'z'       : '#h',
-    \'options' : {'status-justify' : 'left'} }
+    \ 'a'       : '#S',
+    \ 'win'     : ['#I', '#W'],
+    \ 'cwin'    : ['#I', '#W'],
+    \ 'y'       : ['%Y.%m.%d', '%R'],
+    \ 'z'       : '#h',
+    \ 'options' : {'status-justify' : 'left'} }
 " }}
 
 " ----------------------------------------------------------------------------------------------------------------------
@@ -627,6 +612,10 @@ call vundle#rc()
   Plugin 'godlygeek/tabular'
   Plugin 'edkolev/tmuxline.vim'
   Plugin 'airblade/vim-gitgutter'
+  Plugin 'vim-ruby/vim-ruby'
+  Plugin 'tpope/vim-rails'
+  Plugin 'tpope/vim-rake'
+  Plugin 'tpope/vim-bundler'
 " }}
 
 " Disabled Plugins {{

@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Tmux
 alias tmux='[ -z "$TMUX" ] && TERM=xterm-256color tmux'
 

@@ -1,4 +1,3 @@
-#!/bin/bash
 #
 # bashrc (NDF::BASH)
 #
@@ -15,6 +14,3 @@ for component in 'aliases' 'completions' 'plugins'; do
   _load_component $component
 done
 unset component
-
-# Load the <local-component> from the BASH section
-#_load_component $BASH_LOCAL_COMPONENT

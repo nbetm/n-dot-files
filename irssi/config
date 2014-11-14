@@ -279,4 +279,5 @@ settings = {
   };
   "fe-text" = { actlist_sort = "refnum"; };
   "perl/core/scripts" = { awl_shared_sbar = "OFF"; awl_viewer = "no"; };
+  "fe-common/core" = { theme = "skeita"; };
 };
