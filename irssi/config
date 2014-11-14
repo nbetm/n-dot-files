@@ -262,13 +262,21 @@ statusbar = {
         topicbarend = { priority = "100"; alignment = "right"; };
       };
     };
+    awl_0 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_0 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
   };
 };
 settings = {
   core = {
-    real_name = "Nelson Monserrate";
+    real_name = "Nelson R Monserrate";
     user_name = "nm54591a";
     nick = "nm54591a";
   };
   "fe-text" = { actlist_sort = "refnum"; };
+  "perl/core/scripts" = { awl_shared_sbar = "OFF"; awl_viewer = "no"; };
 };
