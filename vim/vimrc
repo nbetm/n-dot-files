@@ -389,12 +389,12 @@ endfunction
 " Toggle Syntax Check Mode {{
 "
 function! Toggle_Syntax_Check_Mode()
-  if !exists('b:syntax_check_mode')
-    let b:syntax_check_mode = 1
+  if !exists('g:syntax_check_mode')
+    let g:syntax_check_mode = 1
     let g:syntastic_auto_loc_list = 1
     let g:syntastic_auto_jump = 1
   else
-    unlet! b:syntax_check_mode
+    unlet! g:syntax_check_mode
     let g:syntastic_auto_loc_list = 0
     let g:syntastic_auto_jump = 0
     lclose
@@ -408,16 +408,16 @@ endfunction
 " Toggle Line Number Mode {{
 "
 function! Toggle_Line_Number_Mode()
-  if !exists('b:line_number_mode')
-    let b:line_number_mode = 1
+  if !exists('g:line_number_mode')
+    let g:line_number_mode = 1
     set number
   else
-    unlet! b:line_number_mode
+    unlet! g:line_number_mode
     set nonumber
     lclose
   endif
 
-  call Echo('Linu Number Mode: ' . (exists('b:line_number_mode') ? 'Enabled' : 'Disabled'))
+  call Echo('Line Number Mode: ' . (exists('b:line_number_mode') ? 'Enabled' : 'Disabled'))
 endfunction
 " }}
 
@@ -649,6 +649,9 @@ filetype plugin indent on
 " ----------------------------------------------------------------------------------------------------------------------
 "  Melange
 " ----------------------------------------------------------------------------------------------------------------------
+
+silent call Toggle_Line_Number_Mode()
+silent call Toggle_Syntax_Check_Mode()
 
 " Set minimum syntax keyword length.
 " let g:neocomplete#sources#syntax#min_keyword_length = 3
