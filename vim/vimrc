@@ -257,6 +257,11 @@ nmap <silent> <leader>ss    :SessionSave<CR>
 nmap <silent> <F8>          :TagbarToggle<CR>
 nmap <silent> <F10>         :NERDTreeTabsToggle<CR>
 
+" Toggle Paste Mode 
+nnoremap <F2> :set invpaste paste?<CR>
+imap <F2> <C-O>:set invpaste paste?<CR>
+set pastetoggle=<F2>
+
 " Execute make
 nmap <silent> <leader>rr    :!%<CR>
 
