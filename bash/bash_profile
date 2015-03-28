@@ -6,6 +6,9 @@
 # Man Path
 export MANPATH=/usr/local/share/man:$MANPATH
 
+# Add RVM to PATH for scripting
+export PATH=$PATH:$HOME/.rvm/bin
+
 # Path to the BASH section
 export NDF_BASH=$HOME/.bash
 
@@ -22,10 +25,13 @@ export BASH_LOCAL_COMPONENT='local'
 export NDF_BASH_LOCAL=$NDF_BASH/$BASH_LOCAL_COMPONENT
 
 # Load the 'bash_profile.<local-component>.bash' file for any modifications needed
-[ -s $NDF_BASH_LOCAL/bash_profile.$BASH_LOCAL_COMPONENT.bash ] && source $NDF_BASH_LOCAL/bash_profile.$BASH_LOCAL_COMPONENT.bash
+[[ -s $NDF_BASH_LOCAL/bash_profile.$BASH_LOCAL_COMPONENT.bash ]] && source $NDF_BASH_LOCAL/bash_profile.$BASH_LOCAL_COMPONENT.bash
 
 # Include the NDF_BIN directory in the PATH
-[ -d $NDF_BIN ] && export PATH=$NDF_BIN:$PATH
+[[ -d $NDF_BIN ]] && export PATH=$NDF_BIN:$PATH
+
+# Load RVM into a shell session 'as a function'
+[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm 
 
 # Load the '~/.bashrc' file
-[ -s $HOME/.bashrc ] && source $HOME/.bashrc
+[[ -s $HOME/.bashrc ]] && source $HOME/.bashrc
