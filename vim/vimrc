@@ -200,9 +200,11 @@ map <silent> <leader>tt     :call Highlight_Extra_Tab()<CR>
 map <silent> <leader>tw     :set wrap! \| call Echo('Text Wrap: ' . (&wrap ? 'Yes' : 'No'))<CR>
 
 " Toggle Syntax Check Mode
+map <silent> <F10>          :call Toggle_Syntax_Check_Mode()<CR>
 map <silent> <leader>tk     :call Toggle_Syntax_Check_Mode()<CR>
 
 " Toggle Line Number Mode
+map <silent> <F11>          :call Toggle_Line_Number_Mode()<CR>
 map <silent> <leader>tn     :call Toggle_Line_Number_Mode()<CR>
 
 " Toggle Folding Mode
@@ -253,16 +255,19 @@ nmap <silent> <leader>sl    :SessionList<CR>
 nmap          <leader>so    :SessionOpen <C-D>
 nmap <silent> <leader>ss    :SessionSave<CR>
 
-" F-Keys Maps
-nmap <silent> <F8>          :TagbarToggle<CR>
-nmap <silent> <F10>         :NERDTreeTabsToggle<CR>
+" Toggle NERDTree
+nmap <silent> <F3>          :NERDTreeTabsToggle<CR>
+
+" Toggle Tagbar
+nmap <silent> <F4>          :TagbarToggle<CR>
 
 " Toggle Paste Mode 
-nnoremap <F2> :set invpaste paste?<CR>
-imap <F2> <C-O>:set invpaste paste?<CR>
+nnoremap <F2>               :set invpaste paste?<CR>
+imap <F2> <C-O>             :set invpaste paste?<CR>
 set pastetoggle=<F2>
 
 " Execute make
+nmap <silent> <F5>          :!%<CR>
 nmap <silent> <leader>rr    :!%<CR>
 
 " Split line (opposite to S-J joining line)
@@ -277,6 +282,7 @@ inoremap <silent> <Tab>     <C-R>=HandleTabKey()<CR>
 inoremap <expr> <S-Tab>     pumvisible() ? "\<C-p>" : "\<Tab>"
 
 " Strip all trailing whitespace
+nmap <silent> <F12>         :silent! %s/\s\+$// \| let @/='' \| call Echo('Trailing Whitespace stripped')<CR>
 nmap <silent> <leader>w     :silent! %s/\s\+$// \| let @/='' \| call Echo('Trailing Whitespace stripped')<CR>
 
 " ----------------------------------------------------------------------------------------------------------------------
@@ -394,14 +400,14 @@ endfunction
 " Toggle Syntax Check Mode {{
 "
 function! Toggle_Syntax_Check_Mode()
-  if !exists('g:syntax_check_mode')
-    let g:syntax_check_mode = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_auto_jump = 1
+  if !exists('b:syntax_check_mode')
+    let b:syntax_check_mode = 1
+    let b:syntastic_auto_loc_list = 1
+    let b:syntastic_auto_jump = 1
   else
-    unlet! g:syntax_check_mode
-    let g:syntastic_auto_loc_list = 0
-    let g:syntastic_auto_jump = 0
+    unlet! b:syntax_check_mode
+    let b:syntastic_auto_loc_list = 0
+    let b:syntastic_auto_jump = 0
     lclose
   endif
 
@@ -413,11 +419,11 @@ endfunction
 " Toggle Line Number Mode {{
 "
 function! Toggle_Line_Number_Mode()
-  if !exists('g:line_number_mode')
-    let g:line_number_mode = 1
+  if !exists('b:line_number_mode')
+    let b:line_number_mode = 1
     set number
   else
-    unlet! g:line_number_mode
+    unlet! b:line_number_mode
     set nonumber
     lclose
   endif
