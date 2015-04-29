@@ -274,10 +274,14 @@ statusbar = {
 settings = {
   core = {
     real_name = "Nelson R Monserrate";
-    user_name = "nm54591a";
-    nick = "nm54591a";
+    user_name = "nbetm";
+    nick = "nbetm";
   };
   "fe-text" = { actlist_sort = "refnum"; };
   "perl/core/scripts" = { awl_shared_sbar = "OFF"; awl_viewer = "no"; };
-  "fe-common/core" = { theme = "skeita"; };
+  "fe-common/core" = {
+    theme = "skeita";
+    beep_when_window_active = "yes";
+    beep_when_away = "yes";
+  };
 };
