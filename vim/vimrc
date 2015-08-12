@@ -44,24 +44,6 @@ set history=1000
 "  Formatting
 " ----------------------------------------------------------------------------------------------------------------------
 
-" Turn on syntax highlighting
-syntax on
-
-" Dark background
-" set background=dark
-
-" Set the terminal number of colors
-if &term=="xterm"
-  " set t_Co=8
-  " set t_Co=16
-  set t_Co=256
-  set t_Sb=^[[4%dm
-  set t_Sf=^[[3%dm
-endif
-
-" Color scheme
-colorscheme nbetm
-
 " Turn off automatic file type detection (will be activated at the end)
 filetype off
 
@@ -261,7 +243,7 @@ nmap <silent> <F3>          :NERDTreeTabsToggle<CR>
 " Toggle Tagbar
 nmap <silent> <F4>          :TagbarToggle<CR>
 
-" Toggle Paste Mode 
+" Toggle Paste Mode
 nnoremap <F2>               :set invpaste paste?<CR>
 imap <F2> <C-O>             :set invpaste paste?<CR>
 set pastetoggle=<F2>
@@ -483,7 +465,13 @@ endfunction
 " Vim-airline {{
   let g:airline#extensions#tabline#enabled = 1
   let g:airline_powerline_fonts = 1
-  let g:airline_theme = 'murmur'
+  let g:airline_theme = 'base16'
+" }}
+
+" Vim-lucius {{
+  let g:lucius_style = 'dark'
+  let g:lucius_contrast = 'low'
+  let g:lucius_contrast_bg = 'normal'
 " }}
 
 " DelimitMate {{
@@ -512,7 +500,7 @@ endfunction
   let g:NERDTreeIgnore = ['\~$', '\.swp$', '\.git$', '\.svn']
   let g:NERDTreeChDirMode = 2
   let g:NERDTreeHijackNetrw = 1
-  let g:NERDTreeDirArrows = 0
+  let g:NERDTreeDirArrows = 1
   let g:NERDTreeWinSize = 40
   let g:NERDTreeShowBookmarks = 1
   let g:NERDTreeShowHidden = 1
@@ -579,6 +567,7 @@ endfunction
 " }}
 
 " Tmuxline {{
+  let g:airline#extensions#tmuxline#enabled = 0
   let g:tmuxline_preset = {
     \ 'a'       : '#S',
     \ 'win'     : ['#I', '#W'],
@@ -627,6 +616,8 @@ call vundle#rc()
   Plugin 'tpope/vim-rails'
   Plugin 'tpope/vim-rake'
   Plugin 'tpope/vim-bundler'
+  Plugin 'jonathanfilip/vim-lucius'
+  Plugin 'altercation/vim-colors-solarized'
 " }}
 
 " Disabled Plugins {{
@@ -656,6 +647,33 @@ set runtimepath-=~/.vim/bundle/vim-snippets
 
 " Automatically detect file types (this is required by Vundle)
 filetype plugin indent on
+
+" ----------------------------------------------------------------------------------------------------------------------
+"  Syntax & Color
+" ----------------------------------------------------------------------------------------------------------------------
+
+" Set the terminal number of colors
+if &term =~ '256color'
+  set t_Co=256
+  " set t_ut=
+elseif &term == 'xterm'
+  set t_Co=16
+else
+  set t_Co=8
+  set t_Sb=^[[4%dm
+  set t_Sf=^[[3%dm
+endif
+
+" Turn on syntax highlighting
+syntax on
+
+" Dark background
+set background=dark
+
+" Color scheme
+" colorscheme nbetm
+" colorscheme lucius
+colorscheme solarized
 
 " ----------------------------------------------------------------------------------------------------------------------
 "  Melange
