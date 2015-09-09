@@ -44,6 +44,30 @@ set number
 " set relativenumber
 
 " ----------------------------------------------------------------------------------------------------------------------
+"  GUI
+" ----------------------------------------------------------------------------------------------------------------------
+if has("gui_running")
+  " GUI font
+  set guifont=Essential\ PragmataPro:h13,Envy\ Code\ R:h13
+
+  " GUI options [remove menu]
+  set guioptions-=m
+  set guioptions-=M
+
+  " GUI options [remove toolbar]
+  set guioptions-=T
+
+  " GUI options [remove left scrollbars]
+  set guioptions-=l
+  set guioptions-=L
+
+  " GUI options [remove right scrollbars]
+  set guioptions-=r
+  set guioptions-=R
+endif
+
+
+" ----------------------------------------------------------------------------------------------------------------------
 "  Formatting
 " ----------------------------------------------------------------------------------------------------------------------
 
@@ -491,6 +515,10 @@ endfunction
   let g:NERDTreeMapOpenSplit = 's'
   let g:NERDTreeMapOpenVSplit = 'v'
   let g:NERDTreeMapToggleHidden = '.'
+" }}
+
+" NERDTree-Tabs {{
+  let g:nerdtree_tabs_open_on_gui_startup = 0
 " }}
 
 " NeoComplete {{
