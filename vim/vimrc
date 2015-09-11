@@ -48,7 +48,7 @@ set number
 " ----------------------------------------------------------------------------------------------------------------------
 if has("gui_running")
   " GUI font
-  set guifont=Essential\ PragmataPro:h13,Envy\ Code\ R:h13
+  set guifont=Envy\ Code\ RP:h13,Essential\ PragmataPro:h13
 
   " GUI options [remove menu]
   set guioptions-=m
