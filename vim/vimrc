@@ -37,7 +37,7 @@ set scrolloff=2
 " History size
 set history=1000
 
-" Set nunber
+" Set nunber lines
 set number
 
 " Relative number lines instead of absolute
@@ -85,7 +85,6 @@ set smarttab
 set nofoldenable
 set foldcolumn=0
 set foldmethod=syntax
-" set foldtext=Fold_Text()
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 
 " Wrap lines at convenient points
@@ -356,23 +355,6 @@ function! Toggle_StringOption(option, value)
 endfunction
 " }}
 
-" Fold Text {{
-"
-function! Fold_Text()
-  " Get first line, remove fold_markers and trailing spaces
-  let fhead = substitute(getline(v:foldstart), '\s*\(' . substitute(&fmr, ',', '\\|', '') . '\)\d\=', '', 'g')
-  let ftail = ' ── ' . (v:foldend - v:foldstart + 1) . ' Lns ★  ' . v:foldlevel . ' ── '
-  let stail = strchars(ftail)
-
-  if winwidth(0) < &tw || !&tw
-    let size = winwidth(0) - &fdc - &nuw * &nu
-  else
-    let size = &tw
-  endif
-  return printf("%*s%s", -size + stail, fhead, ftail)
-endfunction
-" }}
-
 " Highlight Extra Whitespace {{
 "
 function! Highlight_Extra_Whitespace()
@@ -549,15 +531,15 @@ endfunction
 " }}
 
 " VDebug {{
-  let g:vdebug_keymap = {}
-  let g:vdebug_keymap['detach'] = '<S-F6>'
-  let g:vdebug_keymap['set_breakpoint'] = '<S-F10>'
+  " let g:vdebug_keymap = {}
+  " let g:vdebug_keymap['detach'] = '<S-F6>'
+  " let g:vdebug_keymap['set_breakpoint'] = '<S-F10>'
 
-  let g:vdebug_options = {}
-  let g:vdebug_options['server'] = '127.0.0.1'
-  let g:vdebug_options['on_close'] = 'stop'
-  let g:vdebug_options['break_on_open'] = 0
-  let g:vdebug_options['watch_window_style'] = 'compact'
+  " let g:vdebug_options = {}
+  " let g:vdebug_options['server'] = '127.0.0.1'
+  " let g:vdebug_options['on_close'] = 'stop'
+  " let g:vdebug_options['break_on_open'] = 0
+  " let g:vdebug_options['watch_window_style'] = 'compact'
 " }}
 
 " Syntastic {{
@@ -572,6 +554,7 @@ endfunction
   let g:syntastic_perl_checkers = ['perl']
   let g:syntastic_enable_perl_checker = 1
   let g:syntastic_python_checkers = ['pyflakes', 'pep8', 'mccabe']
+  let g:syntastic_python_pep8_args = '--max-line-length=119'
   " let g:syntastic_mode_map = { "passive_filetypes": ["python"] }
 
   silent call Toggle_Syntax_Check_Mode()
@@ -635,7 +618,6 @@ call vundle#rc()
   Plugin 'Raimondi/delimitMate'
   Plugin 'SirVer/ultisnips'
   Plugin 'Shougo/neocomplete.vim'
-  Plugin 'joonty/vdebug'
   Plugin 'gregsexton/gitv'
   Plugin 'honza/vim-snippets'
   Plugin 'majutsushi/tagbar'
@@ -647,26 +629,26 @@ call vundle#rc()
   Plugin 'tpope/vim-speeddating'
   Plugin 'tpope/vim-surround'
   Plugin 'tpope/vim-unimpaired'
+  Plugin 'tpope/vim-rails'
+  Plugin 'tpope/vim-rake'
+  Plugin 'tpope/vim-bundler'
+  Plugin 'vim-ruby/vim-ruby'
   Plugin 'vim-scripts/FuzzyFinder'
   Plugin 'vim-scripts/sessionman.vim'
   Plugin 'vim-scripts/bufkill.vim'
   Plugin 'vim-scripts/matchit.zip'
   Plugin 'vim-scripts/L9'
+  Plugin 'klen/python-mode'
   Plugin 'bling/vim-airline'
   Plugin 'jistr/vim-nerdtree-tabs'
   Plugin 'godlygeek/tabular'
   Plugin 'edkolev/tmuxline.vim'
   Plugin 'airblade/vim-gitgutter'
-  Plugin 'vim-ruby/vim-ruby'
-  Plugin 'tpope/vim-rails'
-  Plugin 'tpope/vim-rake'
-  Plugin 'tpope/vim-bundler'
-  Plugin 'jonathanfilip/vim-lucius'
   Plugin 'altercation/vim-colors-solarized'
-  Plugin 'klen/python-mode'
 " }}
 
 " Disabled Plugins {{
+  " Plugin 'joonty/vdebug'
   " Plugin 'vim-scripts/perl-support.vim'
   " Plugin 'joedicastro/vim-markdown-extra-preview'
   " Plugin 'vim-scripts/bash-support.vim'
@@ -719,61 +701,7 @@ set background=dark
 colorscheme solarized
 
 " ----------------------------------------------------------------------------------------------------------------------
-"  Melange
+"  TODO
 " ----------------------------------------------------------------------------------------------------------------------
-
-
-" Set minimum syntax keyword length.
-" let g:neocomplete#sources#syntax#min_keyword_length = 3
-" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" " Define dictionary.
-" let g:neocomplete#sources#dictionary#dictionaries = {
-  " \ 'default' : '',
-  " \ 'vimshell' : $HOME.'/.vimshell_hist',
-  " \ 'scheme' : $HOME.'/.gosh_completions'
-    " \ }
-
-" " Define keyword.
-" if !exists('g:neocomplete#keyword_patterns')
-  " let g:neocomplete#keyword_patterns = {}
-" endif
-" let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" " Plugin key-mappings.
-" " inoremap <expr><C-g>     neocomplete#undo_completion()
-" " inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" inoremap <expr><C-y>  neocomplete#close_popup()
-" inoremap <expr><C-e>  neocomplete#cancel_popup()
-" " Close popup by <Space>.
-" inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-" Or set this.
-"let g:neocomplete#enable_cursor_hold_i = 1
-" Or set this.
-"let g:neocomplete#enable_insert_char_pre = 1
-
-" " Enable omni completion.
-" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-" if !exists('g:neocomplete#sources#omni#input_patterns')
-  " let g:neocomplete#sources#omni#input_patterns = {}
-" endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting. https://github.com/c9s/perlomni.vim
-" let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
 
 " vim: set tw=120 fdm=marker fmr={{,}} fdl=0:
