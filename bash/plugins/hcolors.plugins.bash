@@ -13,7 +13,7 @@ hcolors () {
 
   is_function $hc_function || return $E_FAILURE
 
-  local hc_caption="Handy Colors for BASH :: Demo from the 'mx-dot-files'"
+  local hc_caption="Handy Colors for BASH :: Demo from the 'n-dot-files'"
   local hc_pattern="export (.*)='(.*m)';?$"
   local hc_index=1 hc_name hc_code
 
