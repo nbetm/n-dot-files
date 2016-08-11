@@ -11,6 +11,6 @@ _load_component 'system'
 
 # Load the rest of the components from the BASH section
 for component in 'aliases' 'completions' 'local' 'plugins'; do
-  _load_component $component
+    _load_component $component
 done
 unset component

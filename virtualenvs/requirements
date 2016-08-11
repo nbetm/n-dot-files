@@ -1,0 +1,9 @@
+devpi-client
+flake8
+future
+jedi
+mccabe
+nose
+pbr
+pep8
+pyflakes

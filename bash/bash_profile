@@ -6,14 +6,14 @@
 # Man Path
 export MANPATH=/usr/local/share/man:$MANPATH
 
-# Add RVM to PATH for scripting
-export PATH=$PATH:$HOME/.rvm/bin
-
 # Path to the BASH section
 export NDF_BASH=$HOME/.bash
 
-# Path to the BIN section (binaries directory)
-export NDF_BIN=$HOME/.bin
+# Path to the BIN section
+export NDF_BIN=$HOME/.local/bin
+
+# Path to the RVM BIN section
+export RVM_BIN=$HOME/.rvm/bin
 
 # Name of the 'local' component (i.e. custom directory) inside the BASH
 # section. Only the name, no leading or trailing '/'.
@@ -24,14 +24,23 @@ export BASH_LOCAL_COMPONENT='local'
 # Path to the 'local' component inside the BASH section
 export NDF_BASH_LOCAL=$NDF_BASH/$BASH_LOCAL_COMPONENT
 
+# Paths to homebrew coreutils (macOS)
+if [[ $(uname) == "Darwin" ]] && [[ $(which brew) ]]; then
+    export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+    export MANPATH=$(brew --prefix coreutils)/libexec/gnuman:$MANPATH
+fi
+
 # Load the 'bash_profile.<local-component>.bash' file for any modifications needed
 [[ -s $NDF_BASH_LOCAL/bash_profile.$BASH_LOCAL_COMPONENT.bash ]] && source $NDF_BASH_LOCAL/bash_profile.$BASH_LOCAL_COMPONENT.bash
 
 # Include the NDF_BIN directory in the PATH
-[[ -d $NDF_BIN ]] && export PATH=$NDF_BIN:$PATH
+[[ $PATH == *"$NDF_BIN"* ]] || export PATH=$NDF_BIN:$PATH
+
+# Include RVM in the PATH
+[[ $PATH == *"$RVM_BIN"* ]] || export PATH=$PATH:$RVM_BIN
 
 # Load RVM into a shell session 'as a function'
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm 
+[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
 # Load the '~/.bashrc' file
 [[ -s $HOME/.bashrc ]] && source $HOME/.bashrc

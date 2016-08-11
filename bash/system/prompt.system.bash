@@ -1,5 +1,5 @@
 # PS Fragment :: LCRV (Last Command Resulting Value)
-PS_LCRV='$([ $LCRV -eq 0 ] && echo -e "\[${I_GREEN}\]√" || echo -e "\[${I_RED}\]×")'
+PS_LCRV='$([ $LCRV -eq 0 ] && echo -e "\[${GREEN}\]✔" || echo -e "\[${RED}\]✘")'
 
 # PS Fragment :: OOSM (Out-Of-Service Mode)
 PS_OOSM='$(oosm_active && echo -e " \[${WHITE}\]☼\[${R_COLOR}\] " || echo " ")'
@@ -17,7 +17,7 @@ PS2='continue-> '
 PS3='#? '
 
 # Prompt Statement 4 :: Debug Mode
-PS4="+ ${I_MAGENTA}"'${BASH_SOURCE##*/}'" : ${I_RED}"'${FUNCNAME}()'" ${I_GREEN}["'${LINENO}'"]${R_COLOR} » "
+PS4="+ ${MAGENTA}"'${BASH_SOURCE##*/}'" : ${RED}"'${FUNCNAME}()'" ${GREEN}["'${LINENO}'"]${R_COLOR} » "
 
 # Trim the CWD
 export PROMPT_DIRTRIM=5
@@ -36,11 +36,11 @@ export GIT_PS1_DESCRIBE_STYLE="branch"
 # Prompt Statement (PS1).
 #
 prompt_command () {
-  # Save the LCRV for later (otherwise it will be altered)
-  LCRV=$?
+    # Save the LCRV for later (otherwise it will be altered)
+    LCRV=$?
 
-  # Write to the history file the previous command (if OOSM is not active)
-  ! oosm_active && history -a
+    # Write to the history file the previous command (if OOSM is not active)
+    ! oosm_active && history -a
 }
 
 # Assign the function for the command prompt

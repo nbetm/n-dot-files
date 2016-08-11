@@ -22,10 +22,10 @@ export WORKON_HOME=$HOME/.virtualenvs
 mkdir -p $WORKON_HOME
 
 # Project directory
-export PROJECT_HOME=$HOME/projects
+export PROJECT_HOME=$HOME/Projects
 mkdir -p $PROJECT_HOME
 
 # Find virtualenvwrapper.sh and source it
-virtualenvwrapper_bin=`which virtualenvwrapper.sh 2>/dev/null`
-[ $? == 0 ] && source $virtualenvwrapper_bin
+virtualenvwrapper_bin=$(which virtualenvwrapper.sh 2>/dev/null)
+[[ $? == 0 ]] && source $virtualenvwrapper_bin
 unset virtualenvwrapper_bin

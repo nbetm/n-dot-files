@@ -1,9 +1,8 @@
-# Virtualenvwrapper
 alias v='virtualenvwrapper'
 alias v.w='workon'
 alias v.d='deactivate'
 alias v.ls='lsvirtualenv'
-alias v.mk='mkvirtualenv'
+alias v.mk='mkvirtualenv -r ~/.virtualenvs/requirements'
 alias v.rm='rmvirtualenv'
 alias v.cd='cdvirtualenv'
 alias v.cp='cpvirtualenv'

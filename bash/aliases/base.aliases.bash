@@ -22,3 +22,9 @@ alias rm='rm -v -i'
 
 # File System Listings
 alias df='df -h -P'
+
+# Tmux
+alias tmux='[ -z "$TMUX" ] && TERM=xterm-256color tmux'
+
+# Irssi
+alias irssi='TERM=screen-256color irssi'
