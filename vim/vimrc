@@ -445,6 +445,13 @@ endfunction
     \ set makeprg=perl\ %
 " }}
 
+" Filetype :: YAML {{
+  autocmd BufNewFile,BufRead *.{yaml,yml}
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2
+" }}
+
 " Filetype :: Shell {{
   let g:is_bash = 1
   let g:sh_fold_enabled = 7
