@@ -224,6 +224,7 @@ map <silent> <leader>tc     :call Toggle_Color_Column_Mode()<CR>
 
 " Toggle NERDTree
 nmap <silent> <F3>          :NERDTreeTabsToggle<CR>
+nmap <silent> <C-\>         :NERDTreeTabsToggle<CR>
 
 " Toggle Tagbar
 nmap <silent> <F4>          :TagbarToggle<CR>
@@ -447,6 +448,13 @@ endfunction
 
 " Filetype :: YAML {{
   autocmd BufNewFile,BufRead *.{yaml,yml}
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2
+" }}
+
+" Filetype :: Ruby {{
+  autocmd BufNewFile,BufRead *.rb
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2
