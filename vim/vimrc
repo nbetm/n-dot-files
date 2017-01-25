@@ -323,6 +323,29 @@ augroup end
     \ endif
 " }}
 
+" Filetype :: Perl {{
+  autocmd BufNewFile,BufRead *.pl
+    \ let perl_fold = 1 |
+    \ let perl_fold_blocks = 1 |
+    \ let perl_nofold_packages = 1 |
+    \ set autowrite |
+    \ set makeprg=perl\ %
+" }}
+
+" Filetype :: YAML {{
+  autocmd BufNewFile,BufRead *.{yaml,yml}
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2
+" }}
+
+" Filetype :: Ruby {{
+  autocmd BufNewFile,BufRead *.rb
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2
+" }}
+
 " External Command Execution Example {{
   " augroup mainqml
   " autocmd!
@@ -436,34 +459,6 @@ endfunction
 " ----------------------------------------------------------------------------------------------------------------------
 "  Plugins Settings
 " ----------------------------------------------------------------------------------------------------------------------
-
-" Filetype :: Perl {{
-  autocmd BufNewFile,BufRead *.pl
-    \ let perl_fold = 1 |
-    \ let perl_fold_blocks = 1 |
-    \ let perl_nofold_packages = 1 |
-    \ set autowrite |
-    \ set makeprg=perl\ %
-" }}
-
-" Filetype :: YAML {{
-  autocmd BufNewFile,BufRead *.{yaml,yml}
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2
-" }}
-
-" Filetype :: Ruby {{
-  autocmd BufNewFile,BufRead *.rb
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2
-" }}
-
-" Filetype :: Shell {{
-  let g:is_bash = 1
-  let g:sh_fold_enabled = 7
-" }}
 
 " Vim-airline {{
   let g:airline#extensions#tabline#enabled = 1
