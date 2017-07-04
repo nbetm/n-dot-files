@@ -257,6 +257,7 @@ vmap <silent> <leader>dp    :diffput \| diffupdate<CR>
 
 " Gitv
 nmap <silent> <leader>gv    :Gitv<CR>
+nmap <silent> <leader>ga    :Git add --all \| :Gcommit --amend<CR>
 
 " Open the NERD Tree Finder
 nmap <silent> <leader>gf    :NERDTreeFind<CR>
@@ -516,7 +517,7 @@ endfunction
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " }}
 
@@ -537,18 +538,6 @@ endfunction
   let g:UltiSnipsListSnippets = "<C-L>"
 
   set runtimepath+=~/.vim/snippets
-" }}
-
-" VDebug {{
-  " let g:vdebug_keymap = {}
-  " let g:vdebug_keymap['detach'] = '<S-F6>'
-  " let g:vdebug_keymap['set_breakpoint'] = '<S-F10>'
-
-  " let g:vdebug_options = {}
-  " let g:vdebug_options['server'] = '127.0.0.1'
-  " let g:vdebug_options['on_close'] = 'stop'
-  " let g:vdebug_options['break_on_open'] = 0
-  " let g:vdebug_options['watch_window_style'] = 'compact'
 " }}
 
 " Syntastic {{
@@ -661,24 +650,6 @@ Plugin 'VundleVim/Vundle.vim'
   Plugin 'airblade/vim-gitgutter'
   Plugin 'altercation/vim-colors-solarized'
   Plugin 'Konfekt/FastFold'
-" }}
-
-" Disabled Plugins {{
-  " Plugin 'joonty/vdebug'
-  " Plugin 'vim-scripts/perl-support.vim'
-  " Plugin 'joedicastro/vim-markdown-extra-preview'
-  " Plugin 'vim-scripts/bash-support.vim'
-  " Plugin 'linux0uid/vdebug'
-  " Plugin 'mileszs/ack.vim'
-  " Plugin 'rodjek/vim-puppet'
-  " Plugin 'ervandew/supertab.git'
-  " Plugin 'vim-scripts/ManPageView.git'
-  " Plugin 'tpope/vim-ragtag.git'
-  " Plugin 'vim-scripts/Command-T.zip'
-  " Plugin 'vim-scripts/taglist.vim.git'
-  " Plugin 'marcweber/ultisnips.git'
-  " Plugin 'msanders/snipmate.vim.git'
-  " Plugin 'tomtom/tlib_vim'
 " }}
 
 " Invalidate the SnipMate's snippets from honza/vim-snippets
