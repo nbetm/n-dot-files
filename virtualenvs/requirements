@@ -1,7 +1,0 @@
-flake8
-future
-pbr
-pep8
-pyflakes
-pylint
-tox
