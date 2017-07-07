@@ -1,4 +1,3 @@
----
 #
 # MIT License
 #
@@ -23,47 +22,4 @@
 # SOFTWARE.
 
 
-# ------------------------------------------------------------------------------
-# Global
-# ------------------------------------------------------------------------------
-
-# OS specific packages (dependencies)
-debian_based_packages:
- - tree
- - bash-completion
- - tmux
-
-redhat_based_packages:
- - tree
- - bash-completion
- - tmux
-
-# ------------------------------------------------------------------------------
-# Bash
-# ------------------------------------------------------------------------------
-
-# Path to the Bash directory
-ndf_bash_path: ~/.bash.d
-
-# Path to the local bin directory
-ndf_bin_path: ~/.local/bin
-
-# Path to the RVM bin directory
-rvm_bin_path: ~/.rvm/bin
-
-# Bash components
-ndf_bash_components:
-  - system
-  - aliases
-  - completions
-  - plugins
-  - local
-
-# ------------------------------------------------------------------------------
-# Tmux
-# ------------------------------------------------------------------------------
-
-tmux_config_dir: ~/.tmux.d
-tmux_config_file: ~/.tmux.conf
-
-# vim:syntax=yaml
+alias tmux='[ -z "$TMUX" ] && TERM=xterm-256color tmux'

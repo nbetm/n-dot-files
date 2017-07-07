@@ -64,3 +64,4 @@
 
   roles:
     - { name: bash, tags: [bash] }
+    - { name: tmux, tags: [tmux] }

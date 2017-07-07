@@ -23,47 +23,22 @@
 # SOFTWARE.
 
 
-# ------------------------------------------------------------------------------
-# Global
-# ------------------------------------------------------------------------------
+- name: Create config directory
+  file:
+    path: "{{ tmux_config_dir }}"
+    state: directory
 
-# OS specific packages (dependencies)
-debian_based_packages:
- - tree
- - bash-completion
- - tmux
+- name: Deploy themes
+  copy:
+    src: themes
+    dest: "{{ tmux_config_dir }}"
 
-redhat_based_packages:
- - tree
- - bash-completion
- - tmux
+- name: Deploy config file
+  copy:
+    src: tmux.conf
+    dest: "{{ tmux_config_file }}"
 
-# ------------------------------------------------------------------------------
-# Bash
-# ------------------------------------------------------------------------------
-
-# Path to the Bash directory
-ndf_bash_path: ~/.bash.d
-
-# Path to the local bin directory
-ndf_bin_path: ~/.local/bin
-
-# Path to the RVM bin directory
-rvm_bin_path: ~/.rvm/bin
-
-# Bash components
-ndf_bash_components:
-  - system
-  - aliases
-  - completions
-  - plugins
-  - local
-
-# ------------------------------------------------------------------------------
-# Tmux
-# ------------------------------------------------------------------------------
-
-tmux_config_dir: ~/.tmux.d
-tmux_config_file: ~/.tmux.conf
-
-# vim:syntax=yaml
+- name: Deploy bash alias
+  copy:
+    src: tmux.aliases.bash
+    dest: "{{ ndf_bash_path }}/aliases/tmux.aliases.bash"
