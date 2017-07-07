@@ -4,3 +4,6 @@
 
 # Generic
 .idea/**
+
+# Ansible
+*.retry

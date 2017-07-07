@@ -1,0 +1,60 @@
+---
+#
+# MIT License
+#
+# Copyright (c) 2017 Nelson R Monserrate
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+
+# ------------------------------------------------------------------------------
+# Global
+# ------------------------------------------------------------------------------
+
+# OS specific packages (dependencies)
+debian_based_packages:
+ - tree
+ - bash-completion
+
+redhat_based_packages:
+ - tree
+ - bash-completion
+
+# ------------------------------------------------------------------------------
+# Bash
+# ------------------------------------------------------------------------------
+
+# Path to the Bash directory
+ndf_bash_path: ~/.bash.d
+
+# Path to the local bin directory
+ndf_bin_path: ~/.local/bin
+
+# Path to the RVM bin directory
+rvm_bin_path: ~/.rvm/bin
+
+# Bash components
+ndf_bash_components:
+  - system
+  - aliases
+  - completions
+  - plugins
+  - local
+
+# vim:syntax=yaml
