@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#
+# Retreive virtualenv details
+#
+# Argument: environment name
+

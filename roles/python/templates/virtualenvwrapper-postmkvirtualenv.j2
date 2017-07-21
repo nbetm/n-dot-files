@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#
+# Run actions after a virtualenv is created
+
+# Upgrade base eggs
+pip install --upgrade pip setuptools wheel \
+  {{ python_packages | difference(['virtualenvwrapper']) | join(' ') }}

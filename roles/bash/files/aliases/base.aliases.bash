@@ -55,3 +55,6 @@ alias egrep='egrep --color=auto'
 # Sudo
 alias s='sudo'
 alias ssu='sudo su -'
+
+# JSON Print
+alias p.json='python -m json.tool'

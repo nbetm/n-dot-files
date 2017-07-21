@@ -66,4 +66,30 @@ ndf_bash_components:
 tmux_config_dir: ~/.tmux.d
 tmux_config_file: ~/.tmux.conf
 
+# ------------------------------------------------------------------------------
+# Python
+# ------------------------------------------------------------------------------
+
+# Pip binary (pip2, pip3)
+python_pip: pip2
+
+# Base packages to be installed under user space
+python_packages:
+  - flake8
+  - future
+  - greenlet
+  - jedi
+  - msgpack-python
+  - neovim
+  - pbr
+  - pep8
+  - pyflakes
+  - pylint
+  - tox
+  - virtualenv
+  - virtualenvwrapper
+
+# Path for virtualenvwrapper
+python_virtualenvwraper_path: ~/.virtualenvs
+
 # vim:syntax=yaml

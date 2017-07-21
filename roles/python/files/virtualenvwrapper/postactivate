@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#
+# Run actions after a virtualenv is activated
+
+# Prompt Statement 1 :: Interactive Default
+PS1="\n${PS_LCRV}${PS_OOSM}\[${PS_USER_COLOR}\]\u@\h\[${R_COLOR}\]:\[${I_BLUE}\]\w\[${R_COLOR}\] \[${I_YELLOW}\] </> \$(basename ${VIRTUAL_ENV})\[${R_COLOR}\]\[${I_MAGENTA}\] \$(__git_ps1 '  %s ')\[${R_COLOR}\]\n$ "

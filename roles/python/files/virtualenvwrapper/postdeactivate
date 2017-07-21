@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#
+# Run actions before a virtualenv is activated
+

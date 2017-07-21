@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#
+# Run actions after a virtualenv is deleted
+#
+# Argument: full path to environment directory
+

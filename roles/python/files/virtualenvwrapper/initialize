@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#
+# Run actions during the startup phase when loading a virtualenv
+
