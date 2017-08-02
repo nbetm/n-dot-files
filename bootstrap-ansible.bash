@@ -49,7 +49,7 @@ case $PLATFORM in
                 curl python-devel python-pip
 
         else
-            echo "Unsoported Linux distribution" 1>&2
+            echo "Unsupported Linux distribution" 1>&2
             exit 1
         fi
 
@@ -59,7 +59,7 @@ case $PLATFORM in
         echo "=> Done!"
         ;;
     *)
-        echo "Unsoported OS Platform: ${PLATFORM}" 1>&2
+        echo "Unsupported OS Platform: ${PLATFORM}" 1>&2
         exit 1
 esac
 
