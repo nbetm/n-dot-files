@@ -31,12 +31,10 @@
 debian_based_packages:
  - tree
  - bash-completion
- - tmux
 
 redhat_based_packages:
  - tree
  - bash-completion
- - tmux
 
 # ------------------------------------------------------------------------------
 # Bash

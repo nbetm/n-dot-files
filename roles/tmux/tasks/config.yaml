@@ -23,5 +23,22 @@
 # SOFTWARE.
 
 
-- include: package.yaml tags=tmux-package
-- include: config.yaml tags=tmux-config
+- name: Create config directory
+  file:
+    path: "{{ tmux_config_dir }}"
+    state: directory
+
+- name: Deploy themes
+  copy:
+    src: themes
+    dest: "{{ tmux_config_dir }}"
+
+- name: Deploy config file
+  copy:
+    src: tmux.conf
+    dest: "{{ tmux_config_file }}"
+
+- name: Deploy bash alias
+  copy:
+    src: tmux.aliases.bash
+    dest: "{{ ndf_bash_path }}/aliases/tmux.aliases.bash"

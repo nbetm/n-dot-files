@@ -63,6 +63,6 @@
     no_proxy: localhost,127.0.0.1
 
   roles:
-    - { name: bash, tags: [bash] }
-    - { name: tmux, tags: [tmux] }
-    - { name: python, tags: [python] }
+    - { role: bash, tags: [ bash ] }
+    - { role: tmux, tags: [ tmux ] }
+    - { role: python, tags: [ python ] }
