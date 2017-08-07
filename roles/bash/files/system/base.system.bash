@@ -37,11 +37,6 @@ export GIT_EDITOR=vim
 # TERM
 export TERM=xterm
 
-# BIN
-export TMUX_BIN=/usr/local/bin/tmux
-export IRSSI_BIN=/usr/bin/irssi
-export SSH_BIN=/usr/bin/ssh
-
 #
 # Function: _hcolors_definition()
 #
