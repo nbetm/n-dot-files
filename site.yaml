@@ -22,37 +22,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-- name: Excute pre-tasks with root privelege
-  hosts: localhost
-  connection: local
-  gather_facts: true
-  become: true
 
-  environment:
-    http_proxy: "{{ proxy | default(omit) }}"
-    https_proxy: "{{ proxy | default(omit) }}"
-    no_proxy: localhost,127.0.0.1
-
-  tasks:
-    - name: Install system packages (Debian/Ubuntu)
-      apt:
-        name: "{{ item }}"
-        state: latest
-      with_items: "{{ debian_based_packages }}"
-      when: ansible_os_family == "Debian"
-
-    - name: Install system packages (RedHat/CentOS)
-      apt:
-        name: "{{ item }}"
-        state: latest
-      with_items: "{{ redhat_based_packages }}"
-      when: ansible_os_family == "RedHat"
-
-  tags:
-    - pre_tasks
-
-
-- name: Setup NDF
+- name: Setup n-dot-files (NDF)
   hosts: localhost
   connection: local
   gather_facts: true
