@@ -1,4 +1,4 @@
----
+#!/usr/bin/env bash
 #
 # MIT License
 #
@@ -23,18 +23,6 @@
 # SOFTWARE.
 
 
-- name: Setup n-dot-files (NDF)
-  hosts: localhost
-  connection: local
-  gather_facts: true
-
-  environment:
-    http_proxy: "{{ proxy | default(omit) }}"
-    https_proxy: "{{ proxy | default(omit) }}"
-    no_proxy: localhost,127.0.0.1
-
-  roles:
-    - { role: bash, tags: [ bash ] }
-    - { role: tmux, tags: [ tmux ] }
-    - { role: python, tags: [ python ] }
-    - { role: nvim, tags: [ nvim, neovim ] }
+# Editors
+export EDITOR=nvim
+export GIT_EDITOR=nvim

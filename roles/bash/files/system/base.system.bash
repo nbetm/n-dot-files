@@ -30,13 +30,6 @@
 export E_SUCCESS=0
 export E_FAILURE=1
 
-# Editors
-export EDITOR=vi
-export GIT_EDITOR=vim
-
-# TERM
-export TERM=xterm
-
 #
 # Function: _hcolors_definition()
 #

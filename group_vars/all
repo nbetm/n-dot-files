@@ -81,4 +81,12 @@ python_packages:
 # Path for virtualenvwrapper
 python_virtualenvwraper_path: ~/.virtualenvs
 
+# ------------------------------------------------------------------------------
+# Neovim
+# ------------------------------------------------------------------------------
+
+nvim_config_dir: $HOME/.config/nvim
+nvim_data_dir: $HOME/.local/share/nvim
+nvim_bundle_dir: $HOME/.local/share/nvim/bundle
+
 # vim:syntax=yaml

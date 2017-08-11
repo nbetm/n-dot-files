@@ -23,18 +23,32 @@
 # SOFTWARE.
 
 
-- name: Setup n-dot-files (NDF)
-  hosts: localhost
-  connection: local
-  gather_facts: true
+- name: Create config directory
+  file:
+    path: "{{ nvim_config_dir }}"
+    state: directory
 
-  environment:
-    http_proxy: "{{ proxy | default(omit) }}"
-    https_proxy: "{{ proxy | default(omit) }}"
-    no_proxy: localhost,127.0.0.1
+- name: Deploy config file
+  copy:
+    src: init.vim
+    dest: "{{ nvim_config_dir }}/init.vim"
 
-  roles:
-    - { role: bash, tags: [ bash ] }
-    - { role: tmux, tags: [ tmux ] }
-    - { role: python, tags: [ python ] }
-    - { role: nvim, tags: [ nvim, neovim ] }
+- name: Create data directory
+  file:
+    path: "{{ nvim_data_dir }}"
+    state: directory
+
+- name: Create bundle directory
+  file:
+    path: "{{ nvim_bundle_dir }}"
+    state: directory
+
+- name: Clone Plugin Manager --- Dein
+  git:
+    repo: https://github.com/Shougo/dein.vim.git
+    dest: "{{ nvim_bundle_dir }}/repos/github.com/Shougo/dein.vim"
+
+- name: Deploy Bash compoments
+  synchronize:
+    src: bash/
+    dest: "{{ ndf_bash_path }}/"
