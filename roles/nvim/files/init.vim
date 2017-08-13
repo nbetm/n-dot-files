@@ -166,36 +166,49 @@ endfunction
 
 " Open Help Files in a Vertical Split --{{
 "
-  autocmd BufWinEnter       *.txt     if &ft == 'help' | wincmd L | endif
+  augroup vsplit_help
+    autocmd!
+    autocmd BufWinEnter       *.txt     if &ft == 'help' | wincmd L | endif
+  augroup end
 " }}--
 
 " Jump to Last Known Position --{{
 "
-  autocmd BufWinEnter       *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   execute "normal! g`\"" |
-    \   execute "normal! zz" |
-    \   execute "normal! zv" |
-    \ endif
+  augroup jump_lkp
+    autocmd!
+    autocmd BufWinEnter       *
+      \ if line("'\"") > 1 && line("'\"") <= line("$") |
+      \   execute "normal! g`\"" |
+      \   execute "normal! zz" |
+      \   execute "normal! zv" |
+      \ endif
+  augroup end
 " }}--
 
 " ------------------------------------------------------------------------------
 " Filetype Detection
 " ------------------------------------------------------------------------------
 
-" Filetype :: groovy --{{
-  autocmd BufNewFile,BufRead *.groovy
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4
+" Filetype :: Groovy --{{
+"
+  augroup ft_groovy
+    autocmd!
+    autocmd BufNewFile,BufRead *.groovy
+      \ set tabstop=4 |
+      \ set softtabstop=4 |
+      \ set shiftwidth=4
+  augroup end
 " }}--
 
 " Filetype :: JSON --{{
 "
-  autocmd BufNewFile,BufRead *.json
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4
+  augroup ft_json
+    autocmd!
+    autocmd BufNewFile,BufRead *.json
+      \ set tabstop=4 |
+      \ set softtabstop=4 |
+      \ set shiftwidth=4
+  augroup end
 " }}--
 
 " ------------------------------------------------------------------------------
