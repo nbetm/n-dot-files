@@ -9,6 +9,7 @@ let $NVIM_CONFIG_DIR = fnamemodify(expand($MYVIMRC), ':h')
 
 " Neovim Data Dir
 let $NVIM_DATA_DIR = $HOME . "/.local/share/nvim"
+
 " }}--
 
 " Change all Leaders to <SPACE>
@@ -35,11 +36,7 @@ set shiftround
 set expandtab
 
 " Smart auto-indent when creating a new line
-set autoindent
 set smartindent
-
-" Set the default encodings just in case $LANG isn't set
-set encoding=utf-8
 
 " Maximum width of text that is being inserted
 set textwidth=80
@@ -68,9 +65,6 @@ set smartcase
 
 " Command line completion
 set wildmode=longest:full,full
-
-" Set complete=.,w,b,u,t"
-set complete-=i
 
 " Insert mode completion
 set completeopt=menu,longest,preview
@@ -107,9 +101,9 @@ function! Toggle_ColorColumn()
 endfunction
 " }}--
 
-" Toggle SingColumn --{{
+" Toggle SignColumn --{{
 "
-" Switch SingColumn between "auto" and "no"
+" Switch SignColumn between "auto" and "no"
 function! Toggle_SignColumn()
   if &signcolumn == "auto"
     set signcolumn=no
@@ -172,36 +166,49 @@ endfunction
 
 " Open Help Files in a Vertical Split --{{
 "
-  autocmd BufWinEnter       *.txt     if &ft == 'help' | wincmd L | endif
+  augroup vsplit_help
+    autocmd!
+    autocmd BufWinEnter       *.txt     if &ft == 'help' | wincmd L | endif
+  augroup end
 " }}--
 
 " Jump to Last Known Position --{{
 "
-  autocmd BufWinEnter       *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   execute "normal! g`\"" |
-    \   execute "normal! zz" |
-    \   execute "normal! zv" |
-    \ endif
+  augroup jump_lkp
+    autocmd!
+    autocmd BufWinEnter       *
+      \ if line("'\"") > 1 && line("'\"") <= line("$") |
+      \   execute "normal! g`\"" |
+      \   execute "normal! zz" |
+      \   execute "normal! zv" |
+      \ endif
+  augroup end
 " }}--
 
 " ------------------------------------------------------------------------------
 " Filetype Detection
 " ------------------------------------------------------------------------------
 
-" Filetype :: groovy --{{
-  autocmd BufNewFile,BufRead *.groovy
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4
+" Filetype :: Groovy --{{
+"
+  augroup ft_groovy
+    autocmd!
+    autocmd BufNewFile,BufRead *.groovy
+      \ set tabstop=4 |
+      \ set softtabstop=4 |
+      \ set shiftwidth=4
+  augroup end
 " }}--
 
 " Filetype :: JSON --{{
 "
-  autocmd BufNewFile,BufRead *.json
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4
+  augroup ft_json
+    autocmd!
+    autocmd BufNewFile,BufRead *.json
+      \ set tabstop=4 |
+      \ set softtabstop=4 |
+      \ set shiftwidth=4
+  augroup end
 " }}--
 
 " ------------------------------------------------------------------------------
@@ -264,19 +271,19 @@ if dein#load_state(s:nvim_bundle_dir)
   " Other
   " call dein#add("mhinz/vim-grepper")
 
+  " TODO: Reallocate --{{
+    " Markdown Preview
+    " Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+    " Plug 'vimlab/mdown.vim', { 'do': 'npm install' }
+
+    " Node.js
+    " Plug 'neovim/node-host', { 'do': 'npm install -g neovim' }
+  " }}--
+
   " Required by the Plugin Manager
   call dein#end()
   call dein#save_state()
 endif
-
-filetype plugin indent on
-
-" " Markdown Preview
-" " Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
-" " Plug 'vimlab/mdown.vim', { 'do': 'npm install' }
-
-" " Node.js
-" " Plug 'neovim/node-host', { 'do': 'npm install -g neovim' }
 
 " ------------------------------------------------------------------------------
 " Plugins Configuration
@@ -319,7 +326,7 @@ filetype plugin indent on
   let g:airline#extensions#ale#enabled      = 1
   let g:airline_powerline_fonts             = 1
   let g:airline_theme                       = 'solarized'
-  " let g:airline_theme                       = 'one'
+" let g:airline_theme                       = 'one'
   let g:airline_solarized_bg                = 'dark'
 " }}--
 
@@ -360,8 +367,8 @@ filetype plugin indent on
 
 " ALE --{{
 "
-  " let g:ale_sign_error   = '■'
-  " let g:ale_sign_warning = '■'
+" let g:ale_sign_error   = '■'
+" let g:ale_sign_warning = '■'
   let g:ale_sign_error   = '✘'
   let g:ale_sign_warning = 'Δ'
 
@@ -405,7 +412,7 @@ filetype plugin indent on
 
   let g:deoplete#sources#jedi#show_docstring = 1
 
-  " set completeopt-=preview
+" set completeopt-=preview
   autocmd CompleteDone * silent! pclose!
 " }}--
 
@@ -442,7 +449,7 @@ map <silent> <leader>Q      :tabclose<CR>
 " Edit the init.vim config file
 map <silent> <leader>ev     :tabedit $HOME/.config/nvim/init.vim<CR>
 
-" Source the vimrc file
+" Source the init.vim config file
 map <silent> <leader>sv     :source $HOME/.config/nvim/init.vim<CR>
 
 " Toggle Paste Mode
@@ -473,8 +480,8 @@ map <silent> <leader>tt     :call Highlight_Extra_Tab()<CR>
 
 " Toggle Folding
 map <silent> <leader>tf     :set foldenable! \| call Echo('Folding: ' . (&foldenable ? 'Yes' : 'No'))<CR>
-nmap <silent> , za
-vmap <silent> , za
+nmap <silent> ,             za
+vmap <silent> ,             za
 
 " Go to the Quickfix window
 nmap <silent> <leader>gq    :cwindow 5<CR>
@@ -504,9 +511,6 @@ set background=dark
 
 " Color scheme
 colorscheme NeoSolarized
-
-" Turn on syntax highlighting
-syntax enable
 
 " ------------------------------------------------------------------------------
 " TODO
