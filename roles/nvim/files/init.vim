@@ -9,6 +9,7 @@ let $NVIM_CONFIG_DIR = fnamemodify(expand($MYVIMRC), ':h')
 
 " Neovim Data Dir
 let $NVIM_DATA_DIR = $HOME . "/.local/share/nvim"
+
 " }}--
 
 " Change all Leaders to <SPACE>
@@ -100,9 +101,9 @@ function! Toggle_ColorColumn()
 endfunction
 " }}--
 
-" Toggle SingColumn --{{
+" Toggle SignColumn --{{
 "
-" Switch SingColumn between "auto" and "no"
+" Switch SignColumn between "auto" and "no"
 function! Toggle_SignColumn()
   if &signcolumn == "auto"
     set signcolumn=no
@@ -433,7 +434,7 @@ map <silent> <leader>Q      :tabclose<CR>
 " Edit the init.vim config file
 map <silent> <leader>ev     :tabedit $HOME/.config/nvim/init.vim<CR>
 
-" Source the vimrc file
+" Source the init.vim config file
 map <silent> <leader>sv     :source $HOME/.config/nvim/init.vim<CR>
 
 " Toggle Paste Mode
