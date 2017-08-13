@@ -271,17 +271,19 @@ if dein#load_state(s:nvim_bundle_dir)
   " Other
   " call dein#add("mhinz/vim-grepper")
 
+  " TODO: Reallocate --{{
+    " Markdown Preview
+    " Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+    " Plug 'vimlab/mdown.vim', { 'do': 'npm install' }
+
+    " Node.js
+    " Plug 'neovim/node-host', { 'do': 'npm install -g neovim' }
+  " }}--
+
   " Required by the Plugin Manager
   call dein#end()
   call dein#save_state()
 endif
-
-" " Markdown Preview
-" " Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
-" " Plug 'vimlab/mdown.vim', { 'do': 'npm install' }
-
-" " Node.js
-" " Plug 'neovim/node-host', { 'do': 'npm install -g neovim' }
 
 " ------------------------------------------------------------------------------
 " Plugins Configuration
