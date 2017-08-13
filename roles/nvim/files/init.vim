@@ -35,11 +35,7 @@ set shiftround
 set expandtab
 
 " Smart auto-indent when creating a new line
-set autoindent
 set smartindent
-
-" Set the default encodings just in case $LANG isn't set
-set encoding=utf-8
 
 " Maximum width of text that is being inserted
 set textwidth=80
@@ -68,9 +64,6 @@ set smartcase
 
 " Command line completion
 set wildmode=longest:full,full
-
-" Set complete=.,w,b,u,t"
-set complete-=i
 
 " Insert mode completion
 set completeopt=menu,longest,preview
@@ -268,8 +261,6 @@ if dein#load_state(s:nvim_bundle_dir)
   call dein#end()
   call dein#save_state()
 endif
-
-filetype plugin indent on
 
 " " Markdown Preview
 " " Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
@@ -504,9 +495,6 @@ set background=dark
 
 " Color scheme
 colorscheme NeoSolarized
-
-" Turn on syntax highlighting
-syntax enable
 
 " ------------------------------------------------------------------------------
 " TODO
