@@ -326,7 +326,7 @@ endif
   let g:airline#extensions#ale#enabled      = 1
   let g:airline_powerline_fonts             = 1
   let g:airline_theme                       = 'solarized'
-  " let g:airline_theme                       = 'one'
+" let g:airline_theme                       = 'one'
   let g:airline_solarized_bg                = 'dark'
 " }}--
 
@@ -367,8 +367,8 @@ endif
 
 " ALE --{{
 "
-  " let g:ale_sign_error   = '■'
-  " let g:ale_sign_warning = '■'
+" let g:ale_sign_error   = '■'
+" let g:ale_sign_warning = '■'
   let g:ale_sign_error   = '✘'
   let g:ale_sign_warning = 'Δ'
 
@@ -412,7 +412,7 @@ endif
 
   let g:deoplete#sources#jedi#show_docstring = 1
 
-  " set completeopt-=preview
+" set completeopt-=preview
   autocmd CompleteDone * silent! pclose!
 " }}--
 
@@ -480,8 +480,8 @@ map <silent> <leader>tt     :call Highlight_Extra_Tab()<CR>
 
 " Toggle Folding
 map <silent> <leader>tf     :set foldenable! \| call Echo('Folding: ' . (&foldenable ? 'Yes' : 'No'))<CR>
-nmap <silent> , za
-vmap <silent> , za
+nmap <silent> ,             za
+vmap <silent> ,             za
 
 " Go to the Quickfix window
 nmap <silent> <leader>gq    :cwindow 5<CR>
