@@ -311,6 +311,7 @@ endif
   let g:NERDTreeMapOpenSplit    = 's'
   let g:NERDTreeMapOpenVSplit   = 'v'
   let g:NERDTreeMapToggleHidden = '.'
+  let g:NERDTreeWinSize         = 45
 " }}--
 
 " NERDCommenter --{{
