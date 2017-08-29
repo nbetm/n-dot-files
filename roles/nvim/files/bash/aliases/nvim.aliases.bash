@@ -24,3 +24,5 @@
 
 alias vim='nvim'
 alias vi='vim'
+
+alias vimdiff='vimdiff.nvim'
