@@ -30,7 +30,7 @@
     deb: roles/tmux/packages/tmux_2.5-3_amd64.deb
     state: present
   when:
-    - ansible_distribution == "Ubuntu"
+    - ansible_distribution == "Ubuntu" or ansible_distribution == "Neon"
     - ansible_distribution_major_version|int >= 16
 
 - name: Install package --- RedHat/CentOS

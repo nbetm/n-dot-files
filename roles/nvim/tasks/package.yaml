@@ -30,7 +30,7 @@
     repo: "ppa:neovim-ppa/stable"
     state: present
   when:
-    - ansible_distribution == "Ubuntu"
+    - ansible_distribution == "Ubuntu" or ansible_distribution == "Neon"
     - ansible_distribution_major_version|int >= 16
 
 - name: Install package --- Ubuntu
