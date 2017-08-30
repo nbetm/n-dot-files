@@ -2,15 +2,11 @@
 " Global Configuration
 " ------------------------------------------------------------------------------
 
-" Variables Declarations --{{
-"
 " Neovim Config Dir
-let $NVIM_CONFIG_DIR = fnamemodify(expand($MYVIMRC), ':h')
+let $NVIM_CONFIG_DIR = fnamemodify(expand($MYVIMRC), ":h")
 
 " Neovim Data Dir
 let $NVIM_DATA_DIR = $HOME . "/.local/share/nvim"
-
-" }}--
 
 " Change all Leaders to <SPACE>
 let mapleader = " "
@@ -29,9 +25,9 @@ set scrolloff=5
 set number
 
 " Tabs
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set shiftround
 set expandtab
 
@@ -86,18 +82,18 @@ set fillchars=vert:\ ,fold:\ ,diff:-
 " Echo with Highlighting --{{
 "
 function! Echo(message)
-  echohl ModeMsg | echo '--' a:message '--' | echohl None
+    echohl ModeMsg | echo '--' a:message '--' | echohl None
 endfunction
 " }}--
 
 " Toggle Color Column Mode --{{
 "
 function! Toggle_ColorColumn()
-  if empty('&colorcolumn') || &colorcolumn != '+1'
-    set colorcolumn=+1
-  else
-    set colorcolumn=
-  endif
+    if empty('&colorcolumn') || &colorcolumn != '+1'
+        set colorcolumn=+1
+    else
+        set colorcolumn=
+    endif
 endfunction
 " }}--
 
@@ -105,50 +101,50 @@ endfunction
 "
 " Switch SignColumn between "auto" and "no"
 function! Toggle_SignColumn()
-  if &signcolumn == "auto"
-    set signcolumn=no
-  else
-    set signcolumn=auto
-  endif
+    if &signcolumn == "auto"
+        set signcolumn=no
+    else
+        set signcolumn=auto
+    endif
 endfunction
 " }}--
 
 " Highlight Extra Whitespace --{{
 "
 function! Highlight_Extra_Whitespace()
-  if !exists('b:matchid_extra_whitespace')
-    let b:matchid_extra_whitespace = matchadd('Search', '\s\+$')
-  else
-    call matchdelete(b:matchid_extra_whitespace)
-    unlet! b:matchid_extra_whitespace
-  endif
-  call Echo('Highlight Extra Whitespace: '. (exists('b:matchid_extra_whitespace') ? 'Yes' : 'No'))
+    if !exists('b:matchid_extra_whitespace')
+        let b:matchid_extra_whitespace = matchadd('Search', '\s\+$')
+    else
+        call matchdelete(b:matchid_extra_whitespace)
+        unlet! b:matchid_extra_whitespace
+    endif
+    call Echo('Highlight Extra Whitespace: '. (exists('b:matchid_extra_whitespace') ? 'Yes' : 'No'))
 endfunction
 " }}--
 
 " Highlight Extra Tab while ExpandTab --{{
 "
 function! Highlight_Extra_Tab()
-  if !exists('b:matchid_extra_tab')
-    let b:matchid_extra_tab = matchadd('Search', '\t\+')
-  else
-    call matchdelete(b:matchid_extra_tab)
-    unlet! b:matchid_extra_tab
-  endif
-  call Echo('Highlight Extra Tab: '. (exists('b:matchid_extra_tab') ? 'Yes' : 'No'))
+    if !exists('b:matchid_extra_tab')
+        let b:matchid_extra_tab = matchadd('Search', '\t\+')
+    else
+        call matchdelete(b:matchid_extra_tab)
+        unlet! b:matchid_extra_tab
+    endif
+    call Echo('Highlight Extra Tab: '. (exists('b:matchid_extra_tab') ? 'Yes' : 'No'))
 endfunction
 " }}--
 
 " BuildComposer --{{
 "
 function! BuildComposer(info)
-  if a:info.status != 'unchanged' || a:info.force
-    if has('nvim')
-      !cargo build --release
-    else
-      !cargo build --release --no-default-features --features json-rpc
+    if a:info.status != 'unchanged' || a:info.force
+        if has('nvim')
+            !cargo build --release
+        else
+            !cargo build --release --no-default-features --features json-rpc
+        endif
     endif
-  endif
 endfunction
 " }}--
 
@@ -166,23 +162,24 @@ endfunction
 
 " Open Help Files in a Vertical Split --{{
 "
-  augroup vsplit_help
+augroup vsplit_help
     autocmd!
-    autocmd BufWinEnter       *.txt     if &ft == 'help' | wincmd L | endif
-  augroup end
+    autocmd BufWinEnter *.txt
+    \   if &ft == 'help' | wincmd L | endif
+augroup end
 " }}--
 
 " Jump to Last Known Position --{{
 "
-  augroup jump_lkp
+augroup jump_lkp
     autocmd!
-    autocmd BufWinEnter       *
-      \ if line("'\"") > 1 && line("'\"") <= line("$") |
-      \   execute "normal! g`\"" |
-      \   execute "normal! zz" |
-      \   execute "normal! zv" |
-      \ endif
-  augroup end
+    autocmd BufWinEnter *
+    \   if line("'\"") > 1 && line("'\"") <= line("$") |
+    \       execute "normal! g`\"" |
+    \       execute "normal! zz" |
+    \       execute "normal! zv" |
+    \   endif
+augroup end
 " }}--
 
 " ------------------------------------------------------------------------------
@@ -191,24 +188,24 @@ endfunction
 
 " Filetype :: Groovy --{{
 "
-  augroup ft_groovy
+augroup ft_groovy
     autocmd!
     autocmd BufNewFile,BufRead *.groovy
-      \ set tabstop=4 |
-      \ set softtabstop=4 |
-      \ set shiftwidth=4
-  augroup end
+    \    set tabstop=4 |
+    \    set softtabstop=4 |
+    \    set shiftwidth=4
+augroup end
 " }}--
 
 " Filetype :: JSON --{{
 "
-  augroup ft_json
+augroup ft_json
     autocmd!
     autocmd BufNewFile,BufRead *.json
-      \ set tabstop=4 |
-      \ set softtabstop=4 |
-      \ set shiftwidth=4
-  augroup end
+    \    set tabstop=4 |
+    \    set softtabstop=4 |
+    \    set shiftwidth=4
+augroup end
 " }}--
 
 " ------------------------------------------------------------------------------
@@ -222,67 +219,65 @@ let s:nvim_bundle_dir = $NVIM_DATA_DIR . "/bundle"
 execute "set runtimepath+=" . s:nvim_bundle_dir . "/repos/github.com/Shougo/dein.vim"
 
 if dein#load_state(s:nvim_bundle_dir)
-  call dein#begin(s:nvim_bundle_dir)
+    call dein#begin(s:nvim_bundle_dir)
 
-  " Dein handling Dein (Required!)
-  call dein#add("Shougo/dein.vim")
+    " Dein handling Dein (Required!)
+    call dein#add("Shougo/dein.vim")
 
-  " Autcompletion & Snippets
-  call dein#add("SirVer/ultisnips")
-  call dein#add("honza/vim-snippets")
-  call dein#add("Shougo/deoplete.nvim", {
-    \ "hook_post_update": ":call dein#remote_plugins()"})
-  call dein#add("zchee/deoplete-jedi")
-  call dein#add("carlitux/deoplete-ternjs", { "build": "npm install -g tern" })
+    " Autcompletion & Snippets
+    call dein#add("SirVer/ultisnips")
+    call dein#add("honza/vim-snippets")
+    call dein#add("Shougo/deoplete.nvim", {"hook_post_update": ":call dein#remote_plugins()"})
+    call dein#add("zchee/deoplete-jedi")
+    call dein#add("carlitux/deoplete-ternjs", {"build": "npm install -g tern"})
 
-  " Fuzzy
-  call dein#add("Shougo/denite.nvim", {
-    \ "hook_post_update": ":call dein#remote_plugins()"})
+    " Fuzzy
+    call dein#add("Shougo/denite.nvim", {"hook_post_update": ":call dein#remote_plugins()"})
 
-  " Git
-  call dein#add("airblade/vim-gitgutter")
-  call dein#add("tpope/vim-fugitive")
-  call dein#add("gregsexton/gitv", { "on_cmd": "Gitv" })
+    " Git
+    call dein#add("airblade/vim-gitgutter")
+    call dein#add("tpope/vim-fugitive")
+    call dein#add("gregsexton/gitv", {"on_cmd": "Gitv"})
 
-  " Format
-  call dein#add("tpope/vim-speeddating")
-  call dein#add("tpope/vim-surround")
-  call dein#add("jiangmiao/auto-pairs")
-  call dein#add("scrooloose/nerdcommenter")
-  call dein#add("junegunn/vim-easy-align")
+    " Format
+    call dein#add("tpope/vim-speeddating")
+    call dein#add("tpope/vim-surround")
+    call dein#add("jiangmiao/auto-pairs")
+    call dein#add("scrooloose/nerdcommenter")
+    call dein#add("junegunn/vim-easy-align")
 
-  " UI
-  call dein#add("vim-airline/vim-airline")
-  call dein#add("nbetm/vim-airline-themes")
-  call dein#add("edkolev/tmuxline.vim")
-  call dein#add("scrooloose/nerdtree", { "on_cmd": "NERDTreeToggle" })
+    " UI
+    call dein#add("vim-airline/vim-airline")
+    call dein#add("nbetm/vim-airline-themes")
+    call dein#add("edkolev/tmuxline.vim")
+    call dein#add("scrooloose/nerdtree", {"on_cmd": "NERDTreeToggle"})
 
-  " Code Linting
-  call dein#add("w0rp/ale")
+    " Code Linting
+    call dein#add("w0rp/ale")
 
-  " Color Syntax
-  call dein#add("rodjek/vim-puppet")
-  call dein#add("pangloss/vim-javascript")
-  call dein#add("moll/vim-node")
+    " Color Syntax
+    call dein#add("rodjek/vim-puppet")
+    call dein#add("pangloss/vim-javascript")
+    call dein#add("moll/vim-node")
 
-  " Color Scheme
-  call dein#add("nbetm/NeoSolarized")
+    " Color Scheme
+    call dein#add("nbetm/NeoSolarized")
 
-  " Other
-  " call dein#add("mhinz/vim-grepper")
+    " Other
+    " call dein#add("mhinz/vim-grepper")
 
-  " TODO: Reallocate --{{
-    " Markdown Preview
-    " Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
-    " Plug 'vimlab/mdown.vim', { 'do': 'npm install' }
+    " TODO: Reallocate --{{
+        " Markdown Preview
+        " Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+        " Plug 'vimlab/mdown.vim', { 'do': 'npm install' }
 
-    " Node.js
-    " Plug 'neovim/node-host', { 'do': 'npm install -g neovim' }
-  " }}--
+        " Node.js
+        " Plug 'neovim/node-host', { 'do': 'npm install -g neovim' }
+    " }}--
 
-  " Required by the Plugin Manager
-  call dein#end()
-  call dein#save_state()
+    " Required by the Plugin Manager
+    call dein#end()
+    call dein#save_state()
 endif
 
 " ------------------------------------------------------------------------------
@@ -291,151 +286,152 @@ endif
 
 " NeoSolarized --{{
 "
-  let g:neosolarized_bold      = 1
-  let g:neosolarized_underline = 1
-  let g:neosolarized_italic    = 1
+let g:neosolarized_bold = 1
+let g:neosolarized_underline = 1
+let g:neosolarized_italic = 1
 " }}--
 
 " NERDTree --{{
 "
-  nmap <silent> <F3>            :NERDTreeToggle<CR>
-  nmap <silent> <leader>n       :NERDTreeToggle<CR>
-  nmap <silent> <leader>nf      :NERDTreeFind<CR>
+let g:NERDTreeBookmarksFile = '~/.local/share/nvim/nerdtree/bookmarks'
+let g:NERDTreeIgnore = ['\~$', '\.swp$', '\.git$', '\.svn']
+let g:NERDTreeChDirMode = 2
+let g:NERDTreeShowBookmarks = 1
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeQuitOnOpen = 0
+let g:NERDTreeMapOpenSplit = 's'
+let g:NERDTreeMapOpenVSplit = 'v'
+let g:NERDTreeMapToggleHidden = '.'
+let g:NERDTreeWinSize = 45
 
-  let g:NERDTreeBookmarksFile   = '~/.local/share/nvim/nerdtree/bookmarks'
-  let g:NERDTreeIgnore          = ['\~$', '\.swp$', '\.git$', '\.svn']
-  let g:NERDTreeChDirMode       = 2
-  let g:NERDTreeShowBookmarks   = 1
-  let g:NERDTreeShowHidden      = 1
-  let g:NERDTreeQuitOnOpen      = 0
-  let g:NERDTreeMapOpenSplit    = 's'
-  let g:NERDTreeMapOpenVSplit   = 'v'
-  let g:NERDTreeMapToggleHidden = '.'
-  let g:NERDTreeWinSize         = 45
+nmap <silent> <F3>            :NERDTreeToggle<CR>
+nmap <silent> <leader>n       :NERDTreeToggle<CR>
+nmap <silent> <leader>nf      :NERDTreeFind<CR>
 " }}--
 
 " NERDCommenter --{{
 "
-  let g:NERDSpaceDelims  = 2        " Add spaces after comment delimiters by default
-  let g:NERDDefaultAlign = 'left'   " Align line-wise comment delimiters flush left instead of following indentation
+let g:NERDSpaceDelims = 2
+let g:NERDDefaultAlign = 'left'
 " }}--
 
 " vim-airline --{{
 "
-  let g:airline#extensions#tabline#enabled  = 1
-  let g:airline#extensions#tmuxline#enabled = 0
-  let g:airline#extensions#ale#enabled      = 1
-  let g:airline_powerline_fonts             = 1
-  let g:airline_theme                       = 'solarized'
-" let g:airline_theme                       = 'one'
-  let g:airline_solarized_bg                = 'dark'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tmuxline#enabled = 0
+let g:airline#extensions#ale#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'solarized'
+let g:airline_solarized_bg = 'dark'
 " }}--
 
 " vim-fugitive --{{
 "
-  nmap <silent> <leader>gd    :Gdiff<CR>
-  nmap <silent> <leader>gs    :Gstatus<CR>
-  nmap <silent> <leader>ga    :Git add --all \| :Gcommit --amend<CR>
-  vmap <silent> <leader>dg    :diffget \| diffupdate<CR>
-  vmap <silent> <leader>dp    :diffput \| diffupdate<CR>
+nmap <silent> <leader>gd    :Gdiff<CR>
+nmap <silent> <leader>gs    :Gstatus<CR>
+nmap <silent> <leader>ga    :Git add --all \| :Gcommit --amend<CR>
+vmap <silent> <leader>dg    :diffget \| diffupdate<CR>
+vmap <silent> <leader>dp    :diffput \| diffupdate<CR>
 " }}--
 
 " vim-gitgutter --{{
 "
-  let g:gitgutter_async = 1
+let g:gitgutter_async = 1
 
-  let g:gitgutter_sign_added            = '+'
-  let g:gitgutter_sign_modified         = '~'
-  let g:gitgutter_sign_removed          = '―'
-  let g:gitgutter_sign_modified_removed = '–'
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '~'
+let g:gitgutter_sign_removed = '―'
+let g:gitgutter_sign_modified_removed = '–'
 " }}--
 
 " Gitv --{{
 "
-  nmap <silent> <leader>gv    :Gitv<CR>
+nmap <silent> <leader>gv    :Gitv<CR>
 " }}--
 
 " tmuxline --{{
 "
-  let g:tmuxline_preset = {
-        \ 'a'       : '#S',
-        \ 'win'     : ['#I', '#W'],
-        \ 'cwin'    : ['#I', '#W'],
-        \ 'y'       : ['%Y.%m.%d', '%R'],
-        \ 'z'       : '#h',
-        \ 'options' : {'status-justify' : 'left'} }
+let g:tmuxline_preset = {
+\    'a': '#S',
+\    'win': ['#I', '#W'],
+\    'cwin': ['#I', '#W'],
+\    'y': ['%Y.%m.%d', '%R'],
+\    'z': '#h',
+\    'options': {'status-justify': 'left'}
+\}
 " }}--
 
 " ALE --{{
 "
 " let g:ale_sign_error   = '■'
 " let g:ale_sign_warning = '■'
-  let g:ale_sign_error   = '✘'
-  let g:ale_sign_warning = 'Δ'
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = 'Δ'
 
-  let g:ale_echo_msg_error_str   = 'E'
-  let g:ale_echo_msg_warning_str = 'W'
-  let g:ale_echo_msg_format      = '[%linter%] %s [%severity%]'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
-  " Linters settings
-  let g:ale_linters = {
-    \ 'yaml': ['yamllint'],
-    \ 'python': ['pylint', 'pycodestyle'],
-  \}
-  
-  let g:ale_yaml_yamllint_options = "-d '{extends: relaxed, rules: {line-length: {max: 120, level: warning}}}'"
+" Linters settings
+let g:ale_linters = {
+\    'yaml': ['yamllint'],
+\    'python': ['pylint', 'pycodestyle'],
+\}
 
-  let g:ale_python_pycodestyle_options = "--max-line-length=119"
-  let g:ale_python_pylint_options = "--max-line-length=119"
+let g:ale_yaml_yamllint_options = "-d '{extends: relaxed, rules: {line-length: {max: 120, level: warning}}}'"
 
-  " Key mappings
-  nmap <silent> <C-k>      <Plug>(ale_previous_wrap)
-  nmap <silent> <C-j>      <Plug>(ale_next_wrap)
+let g:ale_python_pycodestyle_options = '--max-line-length=119'
+let g:ale_python_pylint_options = '--max-line-length=119'
 
-  nmap <silent> <leader>ta :ALEToggle \| call Echo('ALE Enabled: ' . (g:ale_enabled ? 'Yes' : 'No'))<CR>
+" Key mappings
+nmap <silent> <C-k>      <Plug>(ale_previous_wrap)
+nmap <silent> <C-j>      <Plug>(ale_next_wrap)
+
+nmap <silent> <leader>ta :ALEToggle \| call Echo('ALE Enabled: ' . (g:ale_enabled ? 'Yes' : 'No'))<CR>
 " }}--
 
 " EasyAlign --{{
 "
-  xmap ga <Plug>(EasyAlign)
-  nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 " }}--
 
 " UltiSnips --{{
 "
-  let g:UltiSnipsSnippetDirectories  = ['UltiSnips', 'nbetm-snippets']
+let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'nbetm-snippets']
 
-  let g:UltiSnipsEditSplit           = "vertical"
+let g:UltiSnipsEditSplit = 'vertical'
 
-  let g:UltiSnipsExpandTrigger       = "<C-Space>"
-  let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
-  let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
-  let g:UltiSnipsListSnippets        = "<C-L>"
+let g:UltiSnipsExpandTrigger = '<C-Space>'
+let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+let g:UltiSnipsListSnippets = '<C-L>'
 " }}--
 
 " deoplete --{{
 "
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
 
-  let g:deoplete#sources#jedi#show_docstring = 1
+let g:deoplete#sources#jedi#show_docstring = 1
 
 " set completeopt-=preview
-  autocmd CompleteDone * silent! pclose!
+autocmd CompleteDone * silent! pclose!
 " }}--
 
 " deoplete-ternjs --{{
 "
-  " Use deoplete
-  let g:tern_request_timeout = 1
-  let g:tern_show_signature_in_pum = '0'
+" Use deoplete
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'
 
-  " Extra filetypes
-  let g:tern#filetypes = [
-        \ 'jsx',
-        \ 'javascript.jsx',
-        \ 'vue',
-        \ '...']
+" Extra filetypes
+let g:tern#filetypes = [
+\    'jsx',
+\    'javascript.jsx',
+\    'vue',
+\    '...'
+\]
 " }}--
 
 " ------------------------------------------------------------------------------
