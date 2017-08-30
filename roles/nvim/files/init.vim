@@ -377,15 +377,22 @@ endif
   let g:ale_echo_msg_warning_str = 'W'
   let g:ale_echo_msg_format      = '[%linter%] %s [%severity%]'
 
+  " Linters settings
+  let g:ale_linters = {
+    \ 'yaml': ['yamllint'],
+    \ 'python': ['pylint', 'pycodestyle'],
+  \}
+  
+  let g:ale_yaml_yamllint_options = "-d '{extends: relaxed, rules: {line-length: {max: 120, level: warning}}}'"
+
+  let g:ale_python_pycodestyle_options = "--max-line-length=119"
+  let g:ale_python_pylint_options = "--max-line-length=119"
+
+  " Key mappings
   nmap <silent> <C-k>      <Plug>(ale_previous_wrap)
   nmap <silent> <C-j>      <Plug>(ale_next_wrap)
 
   nmap <silent> <leader>ta :ALEToggle \| call Echo('ALE Enabled: ' . (g:ale_enabled ? 'Yes' : 'No'))<CR>
-
-  let g:ale_yaml_yamllint_options = "-d '{extends: relaxed, rules: {line-length: {max: 120, level: warning}}}'"
-
-  let g:ale_python_flake8_options = "--ignore=E501"
-  let g:ale_python_pylint_options = "--disable=C0111"
 " }}--
 
 " EasyAlign --{{
