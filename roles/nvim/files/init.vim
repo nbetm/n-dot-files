@@ -186,25 +186,14 @@ augroup end
 " Filetype Detection
 " ------------------------------------------------------------------------------
 
-" Filetype :: Groovy --{{
+" Filetype :: YAML --{{
 "
-augroup ft_groovy
+augroup ft_yaml
     autocmd!
-    autocmd BufNewFile,BufRead *.groovy
-    \    set tabstop=4 |
-    \    set softtabstop=4 |
-    \    set shiftwidth=4
-augroup end
-" }}--
-
-" Filetype :: JSON --{{
-"
-augroup ft_json
-    autocmd!
-    autocmd BufNewFile,BufRead *.json
-    \    set tabstop=4 |
-    \    set softtabstop=4 |
-    \    set shiftwidth=4
+    autocmd BufNewFile,BufRead *.{yaml,yml}
+    \    set tabstop=2 |
+    \    set softtabstop=2 |
+    \    set shiftwidth=2
 augroup end
 " }}--
 
