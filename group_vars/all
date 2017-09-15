@@ -64,19 +64,21 @@ python_pip: pip2
 
 # Base packages to be installed under user space
 python_packages:
-  - flake8
   - future
   - greenlet
   - jedi
   - msgpack-python
   - neovim
+  - nose
   - pbr
   - pep8
-  - pyflakes
+  - pycodestyle
+  - pydocstyle
   - pylint
   - tox
   - virtualenv
   - virtualenvwrapper
+  - yamllint
 
 # Path for virtualenvwrapper
 python_virtualenvwraper_path: ~/.virtualenvs
