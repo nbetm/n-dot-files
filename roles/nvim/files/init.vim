@@ -269,6 +269,8 @@ if dein#load_state(s:nvim_bundle_dir)
     call dein#save_state()
 endif
 
+filetype plugin indent on
+
 " ------------------------------------------------------------------------------
 " Plugins Configuration
 " ------------------------------------------------------------------------------
@@ -493,6 +495,9 @@ inoremap <expr> <S-Tab>     pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " ------------------------------------------------------------------------------
 " Color Scheme / Syntax
 " ------------------------------------------------------------------------------
+
+" Syntax Enabled
+syntax enable
 
 " Enable true colors (24bit color) terminal
 if has('termguicolors')
