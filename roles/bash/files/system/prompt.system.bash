@@ -23,7 +23,7 @@
 
 
 # PS Fragment :: LCRV (Last Command Resulting Value)
-PS_LCRV='$([ $LCRV -eq 0 ] && echo -e "\[${GREEN}\]✔" || echo -e "\[${RED}\]✘")'
+PS_LCRV='$([ $LCRV -eq 0 ] && echo -e "\[${I_GREEN}\]✔" || echo -e "\[${I_RED}\]✘")'
 
 # PS Fragment :: OOSM (Out-Of-Service Mode)
 PS_OOSM='$(oosm_active && echo -e " \[${WHITE}\]☼\[${R_COLOR}\] " || echo " ")'
