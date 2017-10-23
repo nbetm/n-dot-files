@@ -240,6 +240,7 @@ if dein#load_state(s:nvim_bundle_dir)
     call dein#add("nbetm/vim-airline-themes")
     call dein#add("edkolev/tmuxline.vim")
     call dein#add("scrooloose/nerdtree", {"on_cmd": "NERDTreeToggle"})
+    call dein#add("ryanoasis/vim-devicons")
 
     " Code Linting
     call dein#add("w0rp/ale")
