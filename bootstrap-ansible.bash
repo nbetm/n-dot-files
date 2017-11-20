@@ -24,43 +24,84 @@
 
 set -e -u
 
-if [[ $EUID -ne 0 ]]; then
-    echo "This script must be run as root" 1>&2
-    exit 1
-fi
-
 PLATFORM=$(uname -s)
+
+I_RED="\033[1;31m"
+I_BLUE="\033[1;34m"
+I_WHITE="\033[1;38m"
+R_COLOR="\033[0m"
+
+ARROW="${I_BLUE}==>${R_COLOR}${I_WHITE}"
+ERROR="${I_RED}Error:${R_COLOR}"
+
+#
+# Function: add_sudoers_snippet()
+#
+# Add Sudoers Snippet for NOPASSWD.
+#
+add_sudoers_snippet () {
+    echo -e "${ARROW} Adding Sudoers Snippet for NOPASSWD...${R_COLOR}"
+    echo "${USER} ALL=NOPASSWD: ALL" | sudo tee /etc/sudoers.d/99_${USER}
+    echo
+}
+
+#
+# Install dependencies base on OS Platform
+#
 case $PLATFORM in
     Linux)
+        echo -e "${ARROW} OS Platform: Linux${R_COLOR}\n"
+
+        add_sudoers_snippet
+
         if [[ -f /etc/debian_version ]]; then
             # Debian/Ubuntu
-            echo "=> Detected Debian/Ubuntu based distribution"
+            echo -e "${ARROW} Detected Debian/Ubuntu based distribution${R_COLOR}"
 
-            echo "=> Installing dependencies..."
-            apt install -y build-essential autoconf automake git curl \
-                libssl-dev libffi-dev python-dev python-pip
+            echo -e "${ARROW} Installing dependencies...${R_COLOR}"
+            sudo apt install -y build-essential autoconf automake git curl \
+                     libssl-dev libffi-dev python-dev python-pip
+            echo
 
         elif [[ -f /etc/redhat-release ]]; then
             # RedHat/CentOS
-            echo "=> Detected RedHat/CentOS based distribution"
+            echo -e "${ARROW} Detected RedHat/CentOS based distribution${R_COLOR}"
 
-            echo "=> Installing dependencies..."
-            yum install -y @"Development Tools" libffi-devel openssl-devel \
-                curl python-devel python-pip
+            echo -e "${ARROW} Installing dependencies...${R_COLOR}"
+            sudo yum install -y @"Development Tools" libffi-devel curl \
+                     openssl-devel python-devel python-pip
+            echo
 
         else
-            echo "Unsupported Linux distribution" 1>&2
+            echo -e "${ERROR} Unsupported Linux distribution" 1>&2
+            echo
             exit 1
         fi
+        ;;
+    Darwin)
+            echo -e "${ARROW} OS Platform: macOS(Darwin)${R_COLOR}\n"
 
-        echo "=> Installing Ansible..."
-        pip install --upgrade pip ansible
+            add_sudoers_snippet
 
-        echo "=> Done!"
+            echo -e "${ARROW} Installing dependencies...${R_COLOR}"
+
+            # Homebrew
+            /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+            # Pip
+            curl -fsSL https://bootstrap.pypa.io/get-pip.py | sudo -H /usr/bin/python
         ;;
     *)
-        echo "Unsupported OS Platform: ${PLATFORM}" 1>&2
+        echo -e "${ERROR} Unsupported OS Platform: ${PLATFORM}" 1>&2
+        echo
         exit 1
 esac
+
+# Install Ansible
+#
+echo -e "${ARROW} Installing Ansible...${R_COLOR}"
+pip install --user --upgrade pip ansible
+echo
+
 
 exit 0
