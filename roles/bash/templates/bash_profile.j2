@@ -36,9 +36,6 @@ export NDF_BASH={{ ndf_bash_path }}
 # Path to the local bin directory
 export NDF_BIN={{ ndf_bin_path }}
 
-# Path to the RVM bin directory
-export RVM_BIN={{ rvm_bin_path }}
-
 # Name of the 'local' component (i.e. custom directory) inside the BASH
 # section. Only the name, no leading or trailing '/'.
 export BASH_LOCAL_COMPONENT='local'
@@ -46,17 +43,18 @@ export BASH_LOCAL_COMPONENT='local'
 # Path to the 'local' component inside the BASH section
 export NDF_BASH_LOCAL=$NDF_BASH/$BASH_LOCAL_COMPONENT
 
-# Paths to homebrew coreutils (macOS)
-if [[ $(uname) == "Darwin" ]] && [[ $(which brew) ]]; then
+# Path to Homebrew's formulas bin (macOS)
+if [[ $(uname -s) == "Darwin" ]] && [[ $(which brew) ]]; then
+	# Coreutils
     export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
     export MANPATH=$(brew --prefix coreutils)/libexec/gnuman:$MANPATH
+
+    # Curl
+    export PATH=/usr/local/opt/curl/bin:$PATH
 fi
 
 # Include the NDF_BIN directory in the PATH
 [[ $PATH == *"$NDF_BIN"* ]] || export PATH=$NDF_BIN:$PATH
-
-# Include RVM in the PATH
-[[ $PATH == *"$RVM_BIN"* ]] || export PATH=$PATH:$RVM_BIN
 
 # ------------------------------------------------------------------------------
 # Global imports
@@ -66,9 +64,6 @@ fi
 if [[ -s $NDF_BASH_LOCAL/bash_profile.$BASH_LOCAL_COMPONENT.bash ]]; then
     source $NDF_BASH_LOCAL/bash_profile.$BASH_LOCAL_COMPONENT.bash
 fi
-
-# Load RVM into a shell session 'as a function'
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
 # Load '~/.bashrc'
 [[ -s $HOME/.bashrc ]] && source $HOME/.bashrc

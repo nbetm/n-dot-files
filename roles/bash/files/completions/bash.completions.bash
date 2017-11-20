@@ -29,11 +29,9 @@ if [[ -f /etc/bash_completion ]] && ! shopt -oq posix; then
     source /etc/bash_completion
 fi
 
-# Homebrew bash-completion (macOS)
-if [[ $(uname) == "Darwin" ]] && [[ $(which brew) ]]; then
-    if [[ -f $(brew --prefix)/etc/bash_completion ]]; then
-        source $(brew --prefix)/etc/bash_completion
-    fi
+# Homebrew bash-completion@2 (macOS)
+if [[ -f /usr/local/share/bash-completion/bash_completion ]]; then
+	source /usr/local/share/bash-completion/bash_completion
 fi
 
 # s => sudo

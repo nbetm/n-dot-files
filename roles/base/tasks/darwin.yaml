@@ -22,15 +22,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+- name: macOS | Update Homebrew
+  homebrew:
+    update_homebrew: true
 
-- name: Setup n-dot-files (NDF)
-  hosts: localhost
-  connection: local
-  gather_facts: true
-
-  roles:
-    - { role: base, tags: [ base ] }
-    - { role: bash, tags: [ bash ] }
-    - { role: tmux, tags: [ tmux ] }
-    - { role: python, tags: [ python ] }
-    - { role: nvim, tags: [ nvim, neovim ] }
+- name: macOS | Install OS Base Packages
+  homebrew:
+    name: "{{ item.name | default(item) }}"
+    install_options: "{{ item.install_options | default(omit) }}"
+    state: "{{ item.state | default(omit) }}"
+  with_items: "{{ base_packages.darwin }}"

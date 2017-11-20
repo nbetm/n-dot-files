@@ -22,15 +22,5 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-
-- name: Setup n-dot-files (NDF)
-  hosts: localhost
-  connection: local
-  gather_facts: true
-
-  roles:
-    - { role: base, tags: [ base ] }
-    - { role: bash, tags: [ bash ] }
-    - { role: tmux, tags: [ tmux ] }
-    - { role: python, tags: [ python ] }
-    - { role: nvim, tags: [ nvim, neovim ] }
+- import_tasks: darwin.yaml
+  when: ansible_os_family == "Darwin"

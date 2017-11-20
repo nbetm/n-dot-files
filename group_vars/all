@@ -24,8 +24,43 @@
 
 
 # ------------------------------------------------------------------------------
-# Global
+# Base
 # ------------------------------------------------------------------------------
+
+base_packages:
+  darwin:
+    - bash
+    - bash-completion@2
+    - autoconf
+    - coreutils
+    - binutils
+    - openssl
+    - tig
+    - gawk
+    - gnutls
+    - tree
+    - htop
+    - name: curl
+      install_options: with-openssl,with-libmetalink,with-libssh2
+    - name: wget
+      install_options: with-gpgme,with-libmetalink,with-pcre
+    - name: git
+      install_options: with-openssl,with-curl,with-gettext
+    - name: findutils
+      install_options: with-default-names
+    - name: gnu-indent
+      install_options: with-default-names
+    - name: gnu-sed
+      install_options: with-default-names
+    - name: gnu-tar
+      install_options: with-default-names
+    - name: gnu-which
+      install_options: with-default-names
+    - name: grep
+      install_options: with-default-names
+    - name: less
+      install_options: with-pcre
+
 
 # ------------------------------------------------------------------------------
 # Bash
@@ -36,9 +71,6 @@ ndf_bash_path: ~/.bash.d
 
 # Path to the local bin directory
 ndf_bin_path: ~/.local/bin
-
-# Path to the RVM bin directory
-rvm_bin_path: ~/.rvm/bin
 
 # Bash components
 ndf_bash_components:
