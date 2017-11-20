@@ -45,7 +45,7 @@ export NDF_BASH_LOCAL=$NDF_BASH/$BASH_LOCAL_COMPONENT
 
 # Path to Homebrew's formulas bin (macOS)
 if [[ $(uname -s) == "Darwin" ]] && [[ $(which brew) ]]; then
-	# Coreutils
+    # Coreutils
     export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
     export MANPATH=$(brew --prefix coreutils)/libexec/gnuman:$MANPATH
 

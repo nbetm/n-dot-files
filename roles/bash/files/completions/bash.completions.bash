@@ -31,7 +31,7 @@ fi
 
 # Homebrew bash-completion@2 (macOS)
 if [[ -f /usr/local/share/bash-completion/bash_completion ]]; then
-	source /usr/local/share/bash-completion/bash_completion
+    source /usr/local/share/bash-completion/bash_completion
 fi
 
 # s => sudo

@@ -22,13 +22,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-- name: macOS | Update Homebrew
-  homebrew:
-    update_homebrew: true
 
-- name: macOS | Install OS Base Packages
-  homebrew:
-    name: "{{ item.name | default(item) }}"
-    install_options: "{{ item.install_options | default(omit) }}"
-    state: "{{ item.state | default(omit) }}"
-  with_items: "{{ base_packages.darwin }}"
+- name: Debian/Ubuntu | Install Tmux
+  become: true
+  become_user: root
+  apt:
+    deb: roles/tmux/packages/tmux_2.5-3_amd64.deb
+    state: present

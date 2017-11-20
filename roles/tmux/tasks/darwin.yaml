@@ -23,18 +23,8 @@
 # SOFTWARE.
 
 
-- name: Install package --- Ubuntu
-  become: true
-  become_user: root
-  apt:
-    deb: roles/tmux/packages/tmux_2.5-3_amd64.deb
+- name: macOS | Install Tmux
+  homebrew:
+    name: tmux
     state: present
-  when:
-    - ansible_distribution == "Ubuntu" or ansible_distribution == "Neon"
-    - ansible_distribution_major_version|int >= 16
-
-- name: Install package --- RedHat/CentOS
-  yum:
-    name: roles/tmux/packages/tmux-2.5-1.fc26.x86_64.rpm
-    state: present
-  when: ansible_os_family == "RedHat"
+    update_homebrew: true

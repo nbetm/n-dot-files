@@ -22,5 +22,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+
 - import_tasks: darwin.yaml
   when: ansible_os_family == "Darwin"

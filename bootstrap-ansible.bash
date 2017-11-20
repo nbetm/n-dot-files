@@ -79,17 +79,17 @@ case $PLATFORM in
         fi
         ;;
     Darwin)
-            echo -e "${ARROW} OS Platform: macOS(Darwin)${R_COLOR}\n"
+        echo -e "${ARROW} OS Platform: macOS(Darwin)${R_COLOR}\n"
 
-            add_sudoers_snippet
+        add_sudoers_snippet
 
-            echo -e "${ARROW} Installing dependencies...${R_COLOR}"
+        echo -e "${ARROW} Installing dependencies...${R_COLOR}"
 
-            # Homebrew
-            /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        # Homebrew
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-            # Pip
-            curl -fsSL https://bootstrap.pypa.io/get-pip.py | sudo -H /usr/bin/python
+        # Pip
+        curl -fsSL https://bootstrap.pypa.io/get-pip.py | sudo -H /usr/bin/python
         ;;
     *)
         echo -e "${ERROR} Unsupported OS Platform: ${PLATFORM}" 1>&2
@@ -102,6 +102,5 @@ esac
 echo -e "${ARROW} Installing Ansible...${R_COLOR}"
 pip install --user --upgrade pip ansible
 echo
-
 
 exit 0
