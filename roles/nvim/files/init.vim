@@ -249,6 +249,9 @@ if dein#load_state(s:nvim_bundle_dir)
     call dein#add("rodjek/vim-puppet")
     call dein#add("pangloss/vim-javascript")
     call dein#add("moll/vim-node")
+    call dein#add("hashivim/vim-terraform")
+    call dein#add("hashivim/vim-packer")
+    call dein#add("hashivim/vim-vagrant")
 
     " UI
     call dein#add("vim-airline/vim-airline")
