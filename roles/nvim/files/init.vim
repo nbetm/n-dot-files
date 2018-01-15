@@ -79,6 +79,9 @@ set fillchars=vert:\ ,fold:\ ,diff:-
 let g:python_host_prog = $HOME . "/.pyenv/versions/py27neovim/bin/python"
 let g:python3_host_prog = $HOME . "/.pyenv/versions/py36neovim/bin/python"
 
+" Use system's clipboard
+set clipboard+=unnamedplus
+
 " ------------------------------------------------------------------------------
 " Functions
 " ------------------------------------------------------------------------------
