@@ -75,6 +75,10 @@ set splitbelow splitright
 " set fillchars=vert:│,fold:\ ,diff:-
 set fillchars=vert:\ ,fold:\ ,diff:-
 
+" Python provider config (requires venv to be created with pyvenv)
+let g:python_host_prog = $HOME . "/.pyenv/versions/py27neovim/bin/python"
+let g:python3_host_prog = $HOME . "/.pyenv/versions/py36neovim/bin/python"
+
 " ------------------------------------------------------------------------------
 " Functions
 " ------------------------------------------------------------------------------
@@ -235,13 +239,6 @@ if dein#load_state(s:nvim_bundle_dir)
     call dein#add("scrooloose/nerdcommenter")
     call dein#add("junegunn/vim-easy-align")
 
-    " UI
-    call dein#add("vim-airline/vim-airline")
-    call dein#add("nbetm/vim-airline-themes")
-    call dein#add("edkolev/tmuxline.vim")
-    call dein#add("scrooloose/nerdtree", {"on_cmd": "NERDTreeToggle"})
-    call dein#add("ryanoasis/vim-devicons")
-
     " Code Linting
     call dein#add("w0rp/ale")
 
@@ -249,6 +246,13 @@ if dein#load_state(s:nvim_bundle_dir)
     call dein#add("rodjek/vim-puppet")
     call dein#add("pangloss/vim-javascript")
     call dein#add("moll/vim-node")
+
+    " UI
+    call dein#add("vim-airline/vim-airline")
+    call dein#add("nbetm/vim-airline-themes")
+    call dein#add("edkolev/tmuxline.vim")
+    call dein#add("scrooloose/nerdtree", {"on_cmd": "NERDTreeToggle"})
+    call dein#add("ryanoasis/vim-devicons")
 
     " Color Scheme
     call dein#add("morhetz/gruvbox")
@@ -314,6 +318,7 @@ let g:NERDDefaultAlign = 'left'
 
 " vim-airline --{{
 "
+" let g:airline_extensions = []
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tmuxline#enabled = 0
 let g:airline#extensions#ale#enabled = 1
