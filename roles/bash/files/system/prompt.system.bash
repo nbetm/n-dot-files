@@ -31,9 +31,6 @@ PS_OOSM='$(oosm_active && echo -e " \[${WHITE}\]☼\[${R_COLOR}\] " || echo " ")
 # PS Fragment :: USER_COLOR (Root or Regular Users)
 is_user_root && PS_USER_COLOR=${RED} || PS_USER_COLOR=${R_COLOR}
 
-# Prompt Statement 1 :: Interactive Default
-PS1="\n${PS_LCRV}${PS_OOSM}\[${PS_USER_COLOR}\]\u@\h\[${R_COLOR}\]:\[${I_BLUE}\]\w\[${R_COLOR}\] \[${I_MAGENTA}\]\$(__git_ps1 '  %s ')\[${R_COLOR}\]\n$ "
-
 # Prompt Statement 2 :: Interactive Continuation
 PS2='continue-> '
 
@@ -65,6 +62,23 @@ prompt_command () {
 
     # Write to the history file the previous command (if OOSM is not active)
     ! oosm_active && history -a
+
+    # Virtualenv
+    if [[ -z ${VIRTUAL_ENV+x} ]]; then
+        PS_VIRTUAL_ENV=""
+    else
+        PS_VIRTUAL_ENV="  \[${I_YELLOW}\]</> \$(basename ${VIRTUAL_ENV})\[${R_COLOR}\]"
+    fi
+
+    # Git
+    if type '__git_ps1' > /dev/null 2>&1; then
+        PS_GIT="\[${I_MAGENTA}\]\$(__git_ps1 '   %s')\[${R_COLOR}\]"
+    else
+        PS_GIT=""
+    fi
+
+    # Prompt Statement 1 :: Interactive Default
+    PS1="\n${PS_LCRV}${PS_OOSM}\[${PS_USER_COLOR}\]\u@\h\[${R_COLOR}\]:\[${I_BLUE}\]\w\[${R_COLOR}\]${PS_GIT}${PS_VIRTUAL_ENV}\n$ "
 }
 
 # Assign the function for the command prompt
